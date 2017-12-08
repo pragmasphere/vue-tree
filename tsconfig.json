@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "#/*": ["app/*"]
+    },
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "noImplicitThis": true,
+    "lib": ["dom", "es2017"],
+    "strict": false,
+    "types": [
+      "jest",
+      "node",
+      "vue"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
+  }
+}

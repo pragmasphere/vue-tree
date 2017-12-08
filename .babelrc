@@ -1,0 +1,21 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false
+    }],
+    "stage-2"
+  ],
+  "env": {
+    "development": {
+      "plugins": ["transform-runtime"]
+    },
+    "production": {
+      "presets": ["es2015"],
+      "plugins": ["babel-plugin-add-module-exports"]
+    },
+    "test": {
+      "presets": ["env", "stage-2"],
+      "plugins": ["transform-es2015-modules-commonjs", "dynamic-import-node"]
+    }
+  }
+}
