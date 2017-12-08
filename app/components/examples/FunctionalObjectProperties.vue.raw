@@ -1,0 +1,45 @@
+<template>
+  <vue-tree :data="data"
+            :label="getLabel"
+            :children="getChildren">
+  </vue-tree>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        data: {
+          label: 'Root',
+          children: [
+            { label: 'A' },
+            {
+              label: 'B', nodes: [
+                { text: 'B.1' },
+                { text: 'B.2' },
+                { text: 'B.3' }
+              ]
+            },
+            { label: 'C' }
+          ]
+        }
+      }
+    },
+    methods: {
+      getLabel (node) {
+        const children = this.getChildren(node)
+        let label = node.label || node.text
+        if (children) {
+          label += ` (${children.length} children)`
+        }
+        return label
+      },
+      getChildren (node) {
+        return node.children || node.nodes
+      }
+    },
+    components: {
+      VueTree
+    }
+  }
+</script>

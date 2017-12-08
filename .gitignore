@@ -1,0 +1,8 @@
+node_modules/
+/dist/
+/lib/
+package-lock.json
+yarn.lock
+*.log*
+/test/unit/coverage/
+/test/e2e/reports/

@@ -1,0 +1,30 @@
+<template>
+  <vue-tree :data="data">
+  </vue-tree>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        data: {
+          label: 'Root',
+          children: [
+            { label: 'A' },
+            {
+              label: 'B', children: [
+                { label: 'B.1' },
+                { label: 'B.2' },
+                { label: 'B.3' }
+              ]
+            },
+            { label: 'C' }
+          ]
+        }
+      }
+    },
+    components: {
+      VueTree
+    }
+  }
+</script>

@@ -1,0 +1,35 @@
+<template>
+  <vue-tree :data="data"
+            :opened="false"
+            :children-async="true"
+            :children="loadChildren">
+  </vue-tree>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        data: {
+          label: 'Root'
+        }
+      }
+    },
+    methods: {
+      loadChildren (node) {
+        return new Promise(function (resolve, reject) {
+          window.setTimeout(() => {
+            resolve([
+              { label: 'A' },
+              { label: 'B' },
+              { label: 'C' }
+            ])
+          }, 500)
+        })
+      }
+    },
+    components: {
+      VueTree
+    }
+  }
+</script>
