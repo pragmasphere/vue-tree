@@ -13,7 +13,7 @@
               </div>
               <div class="row">
                 <div class="col-xs-12 text-center">
-                  <a href="https://github.com/pragmasphere/vue-tree" class="btn btn-lg btn-primary"><i class="fa fa-book" aria-hidden="true"></i> Docs</a>
+                  <router-link :to="{name: 'Docs'}" class="btn btn-lg btn-primary"><i class="fa fa-book" aria-hidden="true"></i> Docs</router-link>
                   <a href="https://github.com/pragmasphere/vue-tree" class="btn btn-lg btn-default"><i class="fa fa-github" aria-hidden="true"></i> Github</a>
                 </div>
               </div>
