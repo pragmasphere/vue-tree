@@ -1,5 +1,7 @@
 # vue-tree
 
+[![Travis](https://img.shields.io/travis/pragmasphere/vue-tree.svg)](https://github.com/pragmasphere/vue-tree)
+
 Simple but extendable Tree Component for VueJS. 
 
 ## Features
@@ -16,7 +18,7 @@ npm install git+https://github.com/pragmasphere/vue-tree.git
 
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
