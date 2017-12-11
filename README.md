@@ -2,7 +2,17 @@
 
 Simple but extendable Tree Component for VueJS. 
 
-Supports lazy loading with Drag & Drop.
+## Features
+
+* Load any data structure without any changes or mapping.
+* Load items Synchronous or Asynchronously.
+* Move items with Drag & Drop.
+* Apply Theme matching your CSS Framework.
+
+## Install
+```bash```
+npm install git+https://github.com/pragmasphere/vue-tree.git
+``````
 
 ## Build Setup
 
@@ -16,9 +26,6 @@ npm run dev
 # build for production with minification
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
 # run unit tests
 npm run unit
 
@@ -28,5 +35,3 @@ npm run e2e
 # run all tests
 npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://toilal.github.io/vue-webpack-template/).
