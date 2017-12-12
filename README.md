@@ -2,6 +2,7 @@
 
 [![Travis](https://img.shields.io/travis/pragmasphere/vue-tree.svg)](https://travis-ci.org/pragmasphere/vue-tree)
 [![npm](https://img.shields.io/npm/v/@pragmasphere/vue-tree.svg)](https://www.npmjs.com/package/@pragmasphere/vue-tree)
+[![Coveralls](https://img.shields.io/coveralls/github/pragmasphere/vue-tree.svg)](https://coveralls.io/github/pragmasphere/vue-tree)
 
 Simple but extendable Tree Component for VueJS. 
 
