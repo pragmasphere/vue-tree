@@ -1,6 +1,7 @@
 # vue-tree
 
-[![Travis](https://img.shields.io/travis/pragmasphere/vue-tree.svg)](https://github.com/pragmasphere/vue-tree)
+[![Travis](https://img.shields.io/travis/pragmasphere/vue-tree.svg)](https://travis-ci.org/pragmasphere/vue-tree)
+[![npm](https://img.shields.io/npm/v/@pragmasphere/vue-tree.svg)](https://www.npmjs.com/package/@pragmasphere/vue-tree)
 
 Simple but extendable Tree Component for VueJS. 
 
@@ -12,9 +13,10 @@ Simple but extendable Tree Component for VueJS.
 * Apply Theme matching your CSS Framework.
 
 ## Install
-```bash```
+
+```bash
 npm install git+https://github.com/pragmasphere/vue-tree.git
-``````
+```
 
 ## Build Setup
 
