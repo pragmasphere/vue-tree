@@ -41,7 +41,7 @@ describe('Basics', () => {
 
   it('should handle data provided with :label="[function]"', () => {
     const propsData = {
-      label: (parent) => parent.title ? parent.title : parent.label,
+      label: (parent: any) => parent.title ? parent.title : parent.label,
       value: {
         title: 'Test',
         children: [{

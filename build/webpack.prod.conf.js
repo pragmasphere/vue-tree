@@ -29,7 +29,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
     path: config.build.assetsRoot,
-    library: '[name]',
+    library: 'VueTree',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     publicPath: process.env.NODE_ENV === 'production'

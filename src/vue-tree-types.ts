@@ -14,11 +14,11 @@ export interface PropertyMapper<T> {
 }
 
 export interface AsyncTreeNodeChildrenLoader {
-  (parent: TreeNode): Promise<TreeNode[]>
+  (parent: TreeNode): Promise<TreeNode[]|null|undefined>
 }
 
 export interface TreeNodeChildrenLoader {
-  (parent: TreeNode): TreeNode[]
+  (parent: TreeNode): TreeNode[]|null|undefined
 }
 
 export interface TreeNodeEvent {

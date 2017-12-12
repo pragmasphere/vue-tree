@@ -1,46 +1,44 @@
-import Vue from 'vue'
-import Component from 'vue-class-component'
-
 import VueTreeNode from '@/VueTreeNode.vue'
-import { Prop } from 'vue-property-decorator'
 import { defaultRootNode, defaultTreeNodeChildrenLoader } from '@/defaults'
-import {
-  AsyncTreeNodeChildrenLoader, PropertyGetter, PropertyMapper, TreeNode,
-  TreeNodeChildrenLoader
-} from '@/vue-tree-types'
+import Vue from "vue";
 
-@Component({
-  components: { VueTreeNode }
+export default Vue.extend({
+  name: 'VueTree',
+  components: {
+    VueTreeNode
+  },
+  props: {
+    value: { // TreeNode
+      type: Object,
+      default: function () {
+        return defaultRootNode
+      }
+    },
+    children: { // TreeNodeChildrenLoader | AsyncTreeNodeChildrenLoader | string
+      type: [Function, String],
+      default: defaultTreeNodeChildrenLoader
+    },
+    childrenAsync: { // boolean
+      type: Boolean,
+      default: false
+    },
+    label: { // PropertyGetter<String> | String
+      type: [Function, String],
+      default: 'label'
+    },
+    leaf: { //PropertyGetter<boolean> | String
+      type: [Function, String],
+      default: 'leaf'
+    },
+    opened: { // PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean
+      type: [Object, Function, String, Boolean],
+      default: function () {
+        return true
+      }
+    },
+    rootHidden: { // boolean
+      type: Boolean,
+      default: false
+    },
+  }
 })
-export default class VueTree extends Vue {
-  @Prop({
-    type: Object, default: function () {
-      return defaultRootNode
-    }
-  })
-  value: TreeNode
-
-  @Prop({ type: [Function, String], default: defaultTreeNodeChildrenLoader })
-  children: TreeNodeChildrenLoader | AsyncTreeNodeChildrenLoader | string
-
-  @Prop({ type: Boolean, default: false })
-  childrenAsync: boolean
-
-  @Prop({ type: [Function, String], default: 'label' })
-  label: PropertyGetter<String> | String
-
-  @Prop({ type: [Function, String], default: 'leaf' })
-  leaf: PropertyGetter<boolean> | String
-
-  @Prop({
-    type: [Object, Function, String, Boolean], default: function () {
-      return true
-    }
-  })
-  opened: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean
-
-  @Prop({
-    type: Boolean, default: false
-  })
-  rootHidden: boolean
-}

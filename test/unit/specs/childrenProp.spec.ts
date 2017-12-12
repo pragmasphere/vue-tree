@@ -45,7 +45,7 @@ describe('Children Property', () => {
   it('should handle data provided with :children="[function]"', () => {
     const propsData = {
       value: { label: 'Test' },
-      children: (parent) => {
+      children: (parent: any) => {
         if (parent.label === 'Test') {
           return [{ label: 'Cat #1' }, { label: 'Cat #2' }]
         } else if (parent.label === 'Cat #1') {
@@ -84,7 +84,7 @@ describe('Children Property', () => {
     const propsData = {
       value: { label: 'Test' },
       childrenAsync: true,
-      children: (parent) => {
+      children: (parent: any) => {
         if (parent.label === 'Test') {
           return Promise.resolve([{ label: 'Cat #1' }, { label: 'Cat #2' }])
         } else if (parent.label === 'Cat #1') {

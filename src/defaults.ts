@@ -1,6 +1,6 @@
 import { TreeNode } from '@/vue-tree-types'
 
-export function defaultTreeNodeChildrenLoader (parent: TreeNode): TreeNode[] {
+export function defaultTreeNodeChildrenLoader (parent: TreeNode): TreeNode[]|null|undefined {
   return parent.children
 }
 

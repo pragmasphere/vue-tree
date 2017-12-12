@@ -129,5 +129,8 @@ exports.buildExternalsFromDependencies = function() {
   for (const dependency in packageJson.devDependencies) {
     externals[dependency] = dependency;
   }
+
+  externals['vue'] = 'Vue'
+
   return externals;
 }
