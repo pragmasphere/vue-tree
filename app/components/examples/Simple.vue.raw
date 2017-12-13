@@ -1,0 +1,11 @@
+<template>
+  <vue-tree></vue-tree>
+</template>
+
+<script>
+  export default {
+    components: {
+      VueTree
+    }
+  }
+</script>

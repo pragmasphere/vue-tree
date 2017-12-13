@@ -1,0 +1,25 @@
+<html>
+
+<head>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="vue-tree.js"></script>
+  <link rel="stylesheet" type="text/css" href="vue-tree.css">
+</head>
+
+<body>
+<div id="app">
+  <vue-tree></vue-tree>
+</div>
+
+<script>
+  Vue.component('vue-tree', VueTree)
+
+  new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue.js!'
+    }
+  })
+</script>
+</body>
+</html>

@@ -3,11 +3,7 @@
     <div class="content container">
       <div class="row">
         <div class="col-xs-12">
-          <vue-tree></vue-tree>
-          <vue-tree></vue-tree>
-          <vue-tree></vue-tree>
-          <vue-tree></vue-tree>
-          <vue-tree></vue-tree>
+          <vuep :template="examples.simple" :scope="scope"></vuep>
         </div>
       </div>
     </div>
