@@ -23,9 +23,30 @@ const createLintingRule = () => ({
     emitWarning: !config.dev.showEslintErrorsInOverlay
   }
 })
+const createTsLintingRule = () => ({
+  test: /\.ts$/, // tslint doesn't support vue files
+  enforce: 'pre',
+  loader: 'tslint-loader',
+  include: [resolve('src'), resolve('app'), resolve('test')],
+  options: {
+    formatter: 'grouped',
+    formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
+    typeCheck: true
+  }
+})
 
 module.exports = {
   context: path.resolve(__dirname, '../'),
+  entry: {
+    app: './app/main.ts'
+  },
+  output: {
+    path: config.build.assetsRoot,
+    filename: '[name].js',
+    publicPath: process.env.NODE_ENV === 'production'
+      ? config.build.assetsPublicPath
+      : config.dev.assetsPublicPath
+  },
   resolve: {
     extensions: ['.vue', '.js', '.ts', '.json'],
     alias: {
@@ -46,17 +67,8 @@ module.exports = {
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
-      {
-        test: /\.ts$/, // tslint doesn't support vue files
-        enforce: 'pre',
-        loader: 'tslint-loader',
-        include: [resolve('src'), resolve('app'), resolve('test')],
-        options: {
-          formatter: 'grouped',
-          formattersDirectory: 'node_modules/custom-tslint-formatters/formatters',
-          typeCheck: true
-        }
-      },
+
+      ...(config.dev.useTslint ? [createTsLintingRule()] : []),
       {
         test: /\.vue$/,
         loader: 'vue-loader',

@@ -2,6 +2,7 @@
 const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const toPascalCase = require('to-pascal-case')
 const packageConfig = require('../package.json')
 
 exports.assetsPath = function (_path) {
@@ -72,7 +73,8 @@ exports.scriptLoaders = function(options) {
     js: {loader: 'babel-loader', options: options.js},
     ts: [
       {
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: options.js
       },
       {
         loader: 'ts-loader',
@@ -116,21 +118,29 @@ exports.createNotifierCallback = () => {
   }
 }
 
+function dependencyObject(dependency) {
+    return {
+      root: toPascalCase(dependency),
+      amd: dependency,
+      commonjs: dependency,
+      commonjs2: dependency
+    }
+}
+
 // Generate externals object from dependencies
 exports.buildExternalsFromDependencies = function() {
   const packageJson = require('../package.json');
   const externals = {};
+
   for (const dependency in packageJson.dependencies) {
-    externals[dependency] = dependency;
+    externals[dependency] = dependencyObject(dependency);
   }
   for (const dependency in packageJson.peerDependencies) {
-    externals[dependency] = dependency;
+    externals[dependency] = dependencyObject(dependency);
   }
   for (const dependency in packageJson.devDependencies) {
-    externals[dependency] = dependency;
+    externals[dependency] = dependencyObject(dependency);
   }
-
-  externals['vue'] = 'Vue'
 
   return externals;
 }
