@@ -84,7 +84,9 @@
                         <h3>Configure</h3>
                         <pre class="col-xs-6" v-highlightjs><code class="javascript">import vue from 'Vue'
 
-  import VueTree from 'vue-tree'
+  import VueTree from '@pragmasphere/vue-tree'
+  import '@pragmasphere/vue-tree/lib/vue-tree.css'
+
   vue.components('vue-tree', VueTree)</code></pre>
                       </div>
                     </div>

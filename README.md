@@ -19,6 +19,19 @@ Simple Tree Component for VueJS.
 npm install @pragmasphere/vue-tree
 ```
 
+```javascript
+import vue from 'Vue'
+
+import VueTree from '@pragmasphere/vue-tree'
+import '@pragmasphere/vue-tree/lib/vue-tree.css'
+
+vue.components('vue-tree', VueTree)
+```
+
+```html
+<vue-tree></vue-tree>
+```
+
 ## Build Setup
 
 ```bash
