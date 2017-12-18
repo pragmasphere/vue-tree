@@ -110,7 +110,7 @@
     "vue-template-compiler": "^2.5.2",
     "vue-test-utils": "^1.0.0-beta.7",
     "vue2-scrollspy": "git+https://github.com/Toilal/vue2-scrollspy",
-    "vuep": "git+https://github.com/Toilal/vuep.git",
+    "vuep": "^0.8.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",

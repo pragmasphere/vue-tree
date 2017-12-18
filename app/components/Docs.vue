@@ -37,23 +37,23 @@
               <a>Properties</a>
             </li>
             <li>
-              <a>Selection</a>
+              <span class="tbd" title="To be done ...">Selection</span>
             </li>
             <li>
-              <a>Edition</a>
+              <span class="tbd" title="To be done ...">Edition</span>
             </li>
             <li>
-              <a>Drag & Drop</a>
+              <span class="tbd" title="To be done ...">Drag & Drop</span>
             </li>
             <li>
-              <a>Themes</a>
+              <span class="tbd" title="To be done ...">Themes</span>
             </li>
           </ul>
         </nav>
       </div>
       <div class="col-sm-9 col-lg-10">
         <div>
-          <div class="content container" v-scroll-spy>
+          <div class="content container">
             <div class="row">
               <div class="page-header">
                 <h1>Vue Tree</h1>
@@ -278,32 +278,34 @@
                   </table>
                 </div>
               </div>
+            </div>
+            <div>
 
-              <div class="row">
+              <div class="row tbd">
                 <div class="col-xs-12">
                   <h2>Themes</h2>
-
+                  <p>To be done ...</p>
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row tbd">
                 <div class="col-xs-12">
                   <h2>Selection</h2>
-
+                  <p>To be done ...</p>
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row tbd">
                 <div class="col-xs-12">
                   <h2>Edition</h2>
-
+                  <p>To be done ...</p>
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row tbd">
                 <div class="col-xs-12">
                   <h2>Drag & Drop</h2>
-
+                  <p>To be done ...</p>
                 </div>
               </div>
             </div>
@@ -314,8 +316,14 @@
   </div>
 </template>
 <style lang="scss" scoped>
+  @import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
+
   .badges {
     padding-bottom: 1em;
+  }
+
+  .tbd {
+    color: $gray-light;
   }
 
   .navbar-brand {
