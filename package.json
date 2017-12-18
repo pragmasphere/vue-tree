@@ -19,7 +19,7 @@
     "prepack": "npm run build",
     "build": "node build/build.lib.js && node build/build.js",
     "postpublish": "npm run upload-docs",
-    "upload-docs": "gh-pages -d dist",
+    "upload-docs": "shx cp app/CNAME dist/ && gh-pages -d dist",
     "release": " npm run lint && npm run tslint && npm run test && npm run build && semantic-release"
   },
   "dependencies": {},
@@ -90,7 +90,7 @@
     "selenium-server": "^3.0.1",
     "semantic-release": "^11.0.2",
     "semver": "^5.3.0",
-    "shelljs": "^0.7.6",
+    "shx": "^0.2.2",
     "to-pascal-case": "^1.0.0",
     "ts-jest": "^21.2.3",
     "ts-loader": "^2.0.3",
