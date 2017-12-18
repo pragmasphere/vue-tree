@@ -67,6 +67,11 @@
                 <h2>Simple Tree Component for VueJS</h2>
               </div>
             </div>
+            <div class="row badges">
+              <div class="col-xs-12 text-center">
+                <p><a href="https://www.npmjs.com/package/@pragmasphere/vue-tree"><img src="https://img.shields.io/npm/v/@pragmasphere/vue-tree.svg" alt="npm" /></a></p>
+              </div>
+            </div>
             <div v-scroll-spy>
               <div class="row">
                 <div class="col-xs-12">
@@ -309,6 +314,10 @@
   </div>
 </template>
 <style lang="scss" scoped>
+  .badges {
+    padding-bottom: 1em;
+  }
+
   .navbar-brand {
     float: none;
   }
