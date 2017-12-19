@@ -1,14 +1,14 @@
 import Vue from 'vue'
 
-import 'font-awesome/scss/font-awesome.scss'
-import './styles/bootstrap-theme.scss'
+require('font-awesome/scss/font-awesome.scss')
+require('./styles/bootstrap-theme.scss')
 
 // @ts-ignore: Missing type definitions
 import * as uiv from 'uiv'
 // @ts-ignore: Missing type definitions
 import Vuep from 'vuep'
-import 'vuep/dist/vuep.css'
-import 'codemirror/theme/neo.css'
+require('vuep/dist/vuep.css')
+require('codemirror/theme/neo.css')
 // @ts-ignore: Missing type definitions
 import Scrollspy from 'vue2-scrollspy'
 // @ts-ignore: Missing type definitions

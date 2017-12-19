@@ -58,7 +58,8 @@
               <div class="page-header">
                 <h1>Vue Tree</h1>
                 <div class="col-xs-12 text-center">
-                  <a href="https://github.com/pragmasphere/vue-tree" class="btn btn-lg btn-default"><i class="fa fa-github" aria-hidden="true"></i> Github</a>
+                  <a href="https://github.com/pragmasphere/vue-tree" class="btn btn-lg btn-default">
+                    <i class="fa fa-github" aria-hidden="true"></i> Github</a>
                 </div>
               </div>
             </div>
@@ -69,7 +70,8 @@
             </div>
             <div class="row badges">
               <div class="col-xs-12 text-center">
-                <p><a href="https://www.npmjs.com/package/@pragmasphere/vue-tree"><img src="https://img.shields.io/npm/v/@pragmasphere/vue-tree.svg" alt="npm" /></a></p>
+                <p><a href="https://www.npmjs.com/package/@pragmasphere/vue-tree">
+                  <img src="https://img.shields.io/npm/v/@pragmasphere/vue-tree.svg" alt="npm"/></a></p>
               </div>
             </div>
             <div v-scroll-spy>
@@ -81,7 +83,9 @@
                     <div class="row">
                       <div class="col-xs-12">
                         <h3>Install</h3>
-                        <pre class="col-xs-6" v-highlightjs><code class="shell">npm install @pragmasphere/vue-tree</code></pre>
+                        <pre class="col-xs-6" v-highlightjs>
+                          <code class="shell">npm install @pragmasphere/vue-tree</code>
+                        </pre>
                       </div>
                     </div>
                     <div class="row">
@@ -140,8 +144,8 @@
                     <div class="col-xs-12">
                       <h3>Custom data structure</h3>
 
-                      <p>If for some reason, you need to use other property names for your tree object, you can customize
-                        those names with <code>label</code> and <code>children</code> component properties</p>
+                      <p>If for some reason, you need to use other property names for your tree object, you can
+                        customize those names with <code>label</code> and <code>children</code> component properties</p>
 
                       <vuep :template="examples.customObjectProperties" :scope="scope"></vuep>
 
@@ -237,8 +241,8 @@
                       <td class="properties-table__name">leaf</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>leaf</code></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as leaf
-                        property. If node is leaf, it's children won't be fetched.
+                      <td class="properties-table__description">Property name from <code>data</code> objects used as
+                        leaf property. If node is leaf, it's children won't be fetched.
                       </td>
                     </tr>
                     <tr>
@@ -261,12 +265,14 @@
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Function that returns initial opened state for given node.
+                      <td class="properties-table__description">Function that returns initial opened state for given
+                        node.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
-                      <td class="properties-table__type"><code>Object<br>{<br>&nbsp;&nbsp;get: (node: TreeNode): Boolean,<br>&nbsp;&nbsp;set: (node: TreeNode, opened: Boolean): void<br>}</code></td>
+                      <td class="properties-table__type"><code>Object<br>{<br>&nbsp;&nbsp;get: (node: TreeNode):
+                        Boolean,<br>&nbsp;&nbsp;set: (node: TreeNode, opened: Boolean): void<br>}</code></td>
                       <td class="properties-table__default"></td>
                       <td class="properties-table__description">Object defining <code>get</code> and <code>set</code>
                         functions for opened state of given node. <code>get</code> function returns initial opened state
@@ -376,4 +382,20 @@
     }
   }
 </style>
-<script lang="ts" src="./Docs.ts"></script>
+<script lang="ts">
+  import Vue from 'vue'
+
+  import VueTree from '@/VueTree.vue'
+
+  import examples from './examples'
+
+  export default Vue.extend ({
+    components: { VueTree },
+    data: function () {
+      return {
+        examples,
+        scope: { VueTree }
+      }
+    }
+  })
+</script>

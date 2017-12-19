@@ -10,12 +10,8 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const isDevelopment = process.env.NODE_ENV === 'development'
-
-const scriptLoadersOptions = {ts: {transpileOnly: isDevelopment, appendTsSuffixTo: [/\.vue$/]}}
-
 const createLintingRule = () => ({
-  test: /\.(js|vue)$/,
+  test: /\.js$/,
   loader: 'eslint-loader',
   enforce: 'pre',
   include: [resolve('src'), resolve('app'), resolve('test')],
@@ -59,11 +55,11 @@ module.exports = {
     ]
   },
   plugins: [
-    ...(isDevelopment? [
-      new ForkTsCheckerWebpackPlugin({
-        watch: ['./src', './app'] // optional but improves performance (less stat calls)
-      })
-    ] : []),
+    new ForkTsCheckerWebpackPlugin({
+      tslint: true,
+      vue: true,
+      watch: ['./src', './app'] // optional but improves performance (less stat calls)
+    }),
     new webpack.ProvidePlugin({
       Babel: "babel-standalone"
     })
@@ -81,16 +77,16 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: utils.scriptLoaders(scriptLoadersOptions).js,
+        use: utils.scriptLoaders(vueLoaderConfig.loadersConfig).js,
         include: [resolve('src'), resolve('app'), resolve('test')]
       },
       {
         test: /\.ts$/,
-        use: utils.scriptLoaders(scriptLoadersOptions).ts,
+        use: utils.scriptLoaders(vueLoaderConfig.loadersConfig).ts,
         include: [resolve('src'), resolve('app'), resolve('test')]
       },
       {
-        test: /\.html?$/,
+        test: /\.(html?|raw)$/,
         loader: 'raw-loader' // Required for karma test runner
       },
       {

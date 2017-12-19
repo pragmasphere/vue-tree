@@ -1,6 +1,8 @@
 {
+    "defaultSeverity": "warning",
     "extends": "tslint-config-standard",
     "rules": {
-      "member-ordering": false
+      "member-ordering": false,
+      "indent": [false, "spaces", 2]
     }
 }
