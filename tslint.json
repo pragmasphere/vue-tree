@@ -1,8 +1,8 @@
 {
     "defaultSeverity": "warning",
+    "plugins": ["vue"],
     "extends": "tslint-config-standard",
     "rules": {
-      "member-ordering": false,
-      "indent": [false, "spaces", 2]
+      "member-ordering": false
     }
 }
