@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
         <div class="well well-sm sample-tree-container">
-          <vue-tree></vue-tree>
+          <vue-tree theme="fontAwesome"></vue-tree>
         </div>
       </div>
     </div>
