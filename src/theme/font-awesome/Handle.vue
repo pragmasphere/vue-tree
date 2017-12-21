@@ -1,7 +1,7 @@
 <template>
   <span class="vue-tree__theme-handle--font-awesome">
     <span v-if="leaf" class="vue-tree__tree-node-handle vue-tree__tree-node-handle--leaf">
-      <i class="fa fa-circle-o" aria-hidden="true"></i>
+      <i class="fa fa-times" aria-hidden="true"></i>
     </span>
     <span v-if="!leaf && !opened" class="vue-tree__tree-node-handle vue-tree__tree-node-handle--closed">
       <i class="fa fa-plus" aria-hidden="true"></i>
