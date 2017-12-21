@@ -10,8 +10,9 @@ Simple Tree Component for VueJS.
 
 * Load any data structure without any changes or mapping.
 * Load items Synchronous or Asynchronously.
+* Apply Theme matching your CSS Framework.
 * Move items with Drag & Drop (To be done).
-* Apply Theme matching your CSS Framework (To be done).
+* Select items with Drag & Drop (To be done).
 
 ## Install
 
