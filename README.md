@@ -33,6 +33,8 @@ vue.components('vue-tree', VueTree)
 <vue-tree></vue-tree>
 ```
 
+Full docs are available at [http://vue-tree.pragmasphere.com](http://vue-tree.pragmasphere.com)
+
 ## Build Setup
 
 ```bash
