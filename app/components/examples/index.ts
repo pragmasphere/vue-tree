@@ -3,5 +3,6 @@ const defaultObjectProperties = require('raw-loader!./DefaultObjectProperties.vu
 const customObjectProperties = require('raw-loader!./CustomObjectProperties.vue.raw')
 const functionalObjectProperties = require('raw-loader!./FunctionalObjectProperties.vue.raw')
 const asyncChildren = require('raw-loader!./AsyncChildren.vue.raw')
+const defaultThemes = require('raw-loader!./DefaultThemes.vue.raw')
 
-export default {simple, defaultObjectProperties, customObjectProperties, functionalObjectProperties, asyncChildren}
+export default {simple, defaultObjectProperties, customObjectProperties, functionalObjectProperties, asyncChildren, defaultThemes}

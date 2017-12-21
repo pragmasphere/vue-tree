@@ -9,6 +9,7 @@ export interface Theme {
   label: VueConstructor
   beforeChildren?: VueConstructor
   afterChildren?: VueConstructor
+  content?: VueConstructor
 }
 
 export interface ThemeContext {

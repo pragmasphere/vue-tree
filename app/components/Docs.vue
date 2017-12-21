@@ -37,6 +37,17 @@
               <a>Properties</a>
             </li>
             <li>
+              <a>Themes</a>
+            </li>
+            <ul data-scroll-spy-id="themes" v-scroll-spy-active v-scroll-spy-link>
+              <li>
+                <a>Default themes</a>
+              </li>
+              <li>
+                <a>Custom theme</a>
+              </li>
+            </ul>
+            <li>
               <span class="tbd" title="To be done ...">Selection</span>
             </li>
             <li>
@@ -44,9 +55,6 @@
             </li>
             <li>
               <span class="tbd" title="To be done ...">Drag & Drop</span>
-            </li>
-            <li>
-              <span class="tbd" title="To be done ...">Themes</span>
             </li>
           </ul>
         </nav>
@@ -282,20 +290,107 @@ vue.components('vue-tree', VueTree)</code></pre>
                         user interacts with the component view.
                       </td>
                     </tr>
+                    <tr>
+                      <td class="properties-table__name">Theme</td>
+                      <td class="properties-table__type"><code>String</code></td>
+                      <td class="properties-table__default"><code>vanilla</code></td>
+                      <td class="properties-table__description">Activate a theme registered in the registry through it's name. See Themes section for more details</td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type"><code>Object</code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Active a theme from it's definition. See Themes section for more details</td>
+                    </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
-            </div>
-            <div>
 
-              <div class="row tbd">
+              <div class="row">
                 <div class="col-xs-12">
                   <h2>Themes</h2>
-                  <p>To be done ...</p>
+
+                  <p>You can change the look of Vue Tree by setting the <code>theme</code> component property. Default themes are bundled with
+                    Vue Tree, and you can write your own theme if needed.</p>
+
+                  <div class="row" data-scroll-spy-id="themes" v-scroll-spy>
+                    <div class="col-xs-12">
+                      <h3>Default themes</h3>
+
+                      <p>Vue Tree is bundled with 2 default themes</p>
+
+                      <ul>
+                        <li><code>vanilla</code>: Display tree nodes with characters only</li>
+                        <li><code>fontAwesome</code>: Display tree nodes with <a href="http://fontawesome.io/" target="_blank">Font Awesome</a> icons</li>
+                      </ul>
+
+                      <p>Default themes are already registered in the theme registry, so they are available using their name directly on the <code>theme</code> component property.</p>
+
+                      <vuep :template="examples.defaultThemes" :scope="scope"></vuep>
+                    </div>
+                    <div class="col-xs-12">
+                      <h3>Custom theme</h3>
+
+                      <p>To create your own Theme, you have to implement an object matching this interface.</p>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="javascript">export interface Theme {
+  handle: VueConstructor
+  label: VueConstructor
+  beforeChildren?: VueConstructor
+  afterChildren?: VueConstructor
+}</code></pre>
+
+                      <p>Each value in this object is a component that will be used to display a part of a tree node.</p>
+
+                      <ul>
+                        <li><code>handle</code> is used to render clickable handle area of the tree node.</li>
+                        <li><code>label</code> is used to render the label area of the tree node.</li>
+                        <li><code>beforeChildren</code> is optional and can be used to render anything before children of a node.</li>
+                        <li><code>afterChildren</code> is optional and can be used to render anything after children of a node.</li>
+                      </ul>
+
+                      <p>Each template component has access to node context through a defined set of props. That means that all template
+                        component should be declared with the following script:</p>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="javascript">export default {
+  props: {
+    node: Object, // The data of the node to display.
+    leaf: Boolean, // Should the node be displayed as a leaf ?
+    opened: Boolean, // Should the node be opened ?
+    label: String, // Label to display.
+    loading: Boolean, // Is the node currently loading ?
+    error: Object // Contains the error object if an error occurs while loading the node.
+  }
+}</code></pre>
+
+                      <p>To start writing your own theme, you should copy sources from one of the default template and start modifying it.</p>
+
+                      <ul>
+                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/vanilla" target="_blank">vanilla</a></li>
+                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/font-awesome" target="_blank">fontAwesome</a></li>
+                      </ul>
+
+                      <p>When your theme is ready, you can set it to <code>theme</code> component property, or your can register it to
+                        theme registry for it to be available as a string like default themes.</p>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="javascript">import theme from '@pragmasphere/vue-tree/theme'
+
+theme.register('my-template', myTemplate)
+</code></pre>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="html">&lt;vue-tree theme="my-template"&gt;&lt;/vue-tree&gt;
+</code></pre>
+
+                    </div>
+                  </div>
+
+
                 </div>
               </div>
 
+            </div>
+            <div>
               <div class="row tbd">
                 <div class="col-xs-12">
                   <h2>Selection</h2>

@@ -1,0 +1,30 @@
+<template>
+  <div>
+    Theme: <select v-model="selectedTheme">
+      <option v-for="option in defaultThemes">
+          {{ option }}
+       </option>
+    </select>
+    <vue-tree :theme="selectedTheme"></vue-tree>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      defaultThemes: ['vanilla', 'fontAwesome'],
+      selectedTheme: 'fontAwesome'
+    }
+  },
+  components: {
+    VueTree
+  }
+}
+</script>
+
+<style>
+  select {
+    margin-bottom: 1em
+  }
+</style>
