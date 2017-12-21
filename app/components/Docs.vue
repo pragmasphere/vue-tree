@@ -37,7 +37,7 @@
               <a>Properties</a>
             </li>
             <li>
-              <a>Themes</a>
+              <a>Theme</a>
             </li>
             <ul data-scroll-spy-id="themes" v-scroll-spy-active v-scroll-spy-link>
               <li>
@@ -291,7 +291,7 @@ vue.components('vue-tree', VueTree)</code></pre>
                       </td>
                     </tr>
                     <tr>
-                      <td class="properties-table__name">Theme</td>
+                      <td class="properties-table__name">theme</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>vanilla</code></td>
                       <td class="properties-table__description">Activate a theme registered in the registry through it's name. See Themes section for more details</td>
@@ -300,7 +300,7 @@ vue.components('vue-tree', VueTree)</code></pre>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Object</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Active a theme from it's definition. See Themes section for more details</td>
+                      <td class="properties-table__description">Activate a theme from its definition object. See Themes section for more details</td>
                     </tr>
                     </tbody>
                   </table>
@@ -309,10 +309,10 @@ vue.components('vue-tree', VueTree)</code></pre>
 
               <div class="row">
                 <div class="col-xs-12">
-                  <h2>Themes</h2>
+                  <h2>Theme</h2>
 
                   <p>You can change the look of Vue Tree by setting the <code>theme</code> component property. Default themes are bundled with
-                    Vue Tree, and you can write your own theme if needed.</p>
+                    Vue Tree, and you can write your own if needed.</p>
 
                   <div class="row" data-scroll-spy-id="themes" v-scroll-spy>
                     <div class="col-xs-12">
