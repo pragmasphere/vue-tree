@@ -6,6 +6,7 @@ import {
 } from './vue-tree-types'
 import { isFunction, isObject, isString } from '@/utils'
 import { defaultRootNode, defaultTreeNodeChildrenLoader } from '@/defaults'
+import theme, { Theme, ThemeContext } from '@/theme'
 
 export default Vue.extend({
   name: 'VueTreeNode',
@@ -41,6 +42,10 @@ export default Vue.extend({
     hidden: { // boolean
       type: Boolean,
       default: false
+    },
+    theme: { // Theme | string
+      type: [Object, String],
+      default: () => 'vanilla'
     }
   },
   data: function () {
@@ -127,6 +132,26 @@ export default Vue.extend({
           this.dataOpened = opened
         }
         this.$emit('opened', this.data)
+      }
+    },
+    themeInstance (): Theme {
+      if (typeof this.theme === 'string') {
+        let themeInstance = theme.get(this.theme)
+        if (!themeInstance) {
+          themeInstance = theme.getVanilla()
+        }
+        return themeInstance
+      }
+      return this.theme
+    },
+    themeContext (): ThemeContext {
+      return {
+        node: this.data,
+        label: this.dataLabel,
+        leaf: this.dataLeaf,
+        opened: this.computedOpened,
+        loading: this.childrenLoading,
+        error: this.childrenError
       }
     }
   },

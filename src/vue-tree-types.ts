@@ -25,7 +25,3 @@ export interface TreeNodeChildrenLoader {
 export interface TreeNodeEvent {
   treeNode: TreeNode
 }
-
-export interface Theme {
-
-}

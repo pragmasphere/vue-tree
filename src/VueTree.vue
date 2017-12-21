@@ -7,7 +7,8 @@
                    :hidden="rootHidden"
                    :opened="opened"
                    :label="label"
-                   :leaf="leaf"></vue-tree-node>
+                   :leaf="leaf"
+                   :theme="theme"></vue-tree-node>
   </ul>
 </template>
 <style lang="scss">

@@ -40,6 +40,10 @@ export default Vue.extend({
     rootHidden: { // boolean
       type: Boolean,
       default: false
+    },
+    theme: { // Theme | string
+      type: [Object, String],
+      default: () => 'vanilla'
     }
   }
 })
