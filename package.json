@@ -1,6 +1,6 @@
 {
   "name": "@pragmasphere/vue-tree",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Simple Tree Component for VueJS.",
   "author": "remi.alvergnat@pragmasphere.com",
   "main": "lib/vue-tree.js",
