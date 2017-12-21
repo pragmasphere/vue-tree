@@ -5,18 +5,18 @@ import fontAwesome from './font-awesome'
 import { TreeNode } from 'src/vue-tree-types'
 
 export interface Theme {
-  handle: VueConstructor,
-  label: VueConstructor,
+  handle: VueConstructor
+  label: VueConstructor
   beforeChildren?: VueConstructor
   afterChildren?: VueConstructor
 }
 
 export interface ThemeContext {
-  node: TreeNode,
-  label: string,
-  leaf: Boolean,
-  opened: Boolean,
-  loading: Boolean,
+  node: TreeNode
+  label: string
+  leaf: Boolean
+  opened: Boolean
+  loading: Boolean
   error: any
 }
 

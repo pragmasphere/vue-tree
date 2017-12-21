@@ -27,9 +27,9 @@
   </li>
 </template>
 <style lang="scss" scoped>
-  .vue-tree__tree-node-handle {
-    cursor: pointer;
-    user-select: none;
-  }
+.vue-tree__tree-node-handle {
+  cursor: pointer;
+  user-select: none;
+}
 </style>
 <script lang="ts" src="./VueTreeNode.ts"></script>

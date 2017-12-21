@@ -6,27 +6,27 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        data: {
-          text: 'Root',
-          nodes: [
-            { text: 'A' },
-            {
-              text: 'B', nodes: [
-                { text: 'B.1' },
-                { text: 'B.2' },
-                { text: 'B.3' }
-              ]
-            },
-            { text: 'C' }
-          ]
-        }
+export default {
+  data () {
+    return {
+      data: {
+        text: 'Root',
+        nodes: [
+          { text: 'A' },
+          {
+            text: 'B', nodes: [
+              { text: 'B.1' },
+              { text: 'B.2' },
+              { text: 'B.3' }
+            ]
+          },
+          { text: 'C' }
+        ]
       }
-    },
-    components: {
-      VueTree
     }
+  },
+  components: {
+    VueTree
   }
+}
 </script>

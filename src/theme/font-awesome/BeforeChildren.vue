@@ -11,21 +11,21 @@
   </span>
 </template>
 <script lang="ts">
-  import Vue from 'vue'
+import Vue from 'vue'
 
-  export default Vue.extend({
-    props: {
-      node: Object,
-      leaf: Boolean,
-      opened: Boolean,
-      label: String,
-      loading: Boolean,
-      error: Object
-    }
-  })
+export default Vue.extend({
+  props: {
+    node: Object,
+    leaf: Boolean,
+    opened: Boolean,
+    label: String,
+    loading: Boolean,
+    error: Object
+  }
+})
 </script>
 <style class="scss" scoped>
-  vue-tree__theme-before-children--vanilla {
-    font-weight: bold;
-  }
+vue-tree__theme-before-children--vanilla {
+  font-weight: bold;
+}
 </style>

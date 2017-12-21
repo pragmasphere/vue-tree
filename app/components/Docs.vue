@@ -58,7 +58,9 @@
               <div class="page-header">
                 <h1>Vue Tree</h1>
                 <div class="col-xs-12 text-center">
-                  <a href="https://github.com/pragmasphere/vue-tree" class="btn btn-lg btn-default"><i class="fa fa-github" aria-hidden="true"></i> Github</a>
+                  <a href="https://github.com/pragmasphere/vue-tree" class="btn btn-lg btn-default">
+                    <i class="fa fa-github" aria-hidden="true"></i> Github
+                  </a>
                 </div>
               </div>
             </div>
@@ -69,7 +71,9 @@
             </div>
             <div class="row badges">
               <div class="col-xs-12 text-center">
-                <p><a href="https://www.npmjs.com/package/@pragmasphere/vue-tree"><img src="https://img.shields.io/npm/v/@pragmasphere/vue-tree.svg" alt="npm" /></a></p>
+                <p><a href="https://www.npmjs.com/package/@pragmasphere/vue-tree">
+                  <img src="https://img.shields.io/npm/v/@pragmasphere/vue-tree.svg" alt="npm"/>
+                </a></p>
               </div>
             </div>
             <div v-scroll-spy>
@@ -89,10 +93,10 @@
                         <h3>Configure</h3>
                         <pre class="col-xs-6" v-highlightjs><code class="javascript">import vue from 'Vue'
 
-  import VueTree from '@pragmasphere/vue-tree'
-  import '@pragmasphere/vue-tree/lib/vue-tree.css'
+import VueTree from '@pragmasphere/vue-tree'
+import '@pragmasphere/vue-tree/lib/vue-tree.css'
 
-  vue.components('vue-tree', VueTree)</code></pre>
+vue.components('vue-tree', VueTree)</code></pre>
                       </div>
                     </div>
                     <div class="row">
@@ -266,7 +270,11 @@
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
-                      <td class="properties-table__type"><code>Object<br>{<br>&nbsp;&nbsp;get: (node: TreeNode): Boolean,<br>&nbsp;&nbsp;set: (node: TreeNode, opened: Boolean): void<br>}</code></td>
+                      <td class="properties-table__type">
+                        <code>Object<br>{<br>
+                          &nbsp;&nbsp;get: (node: TreeNode): Boolean,<br>
+                          &nbsp;&nbsp;set: (node: TreeNode, opened: Boolean): void<br>}
+                        </code></td>
                       <td class="properties-table__default"></td>
                       <td class="properties-table__description">Object defining <code>get</code> and <code>set</code>
                         functions for opened state of given node. <code>get</code> function returns initial opened state
@@ -316,64 +324,64 @@
   </div>
 </template>
 <style lang="scss" scoped>
-  @import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
+@import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
 
-  .badges {
-    padding-bottom: 1em;
+.badges {
+  padding-bottom: 1em;
+}
+
+.tbd {
+  color: $gray-light;
+}
+
+.navbar-brand {
+  float: none;
+}
+
+.navbar__menu {
+  padding: 0 0 0 1em;
+
+  ul, li {
+    list-style: none;
   }
 
-  .tbd {
-    color: $gray-light;
+  ul {
+    padding-left: 12px;
   }
 
-  .navbar-brand {
-    float: none;
+  a {
+    cursor: pointer;
   }
 
-  .navbar__menu {
-    padding: 0 0 0 1em;
-
-    ul, li {
-      list-style: none;
-    }
-
-    ul {
-      padding-left: 12px;
-    }
-
-    a {
-      cursor: pointer;
-    }
-
-    > li {
-      padding-left: 0;
-      margin-top: 1em;
-      font-size: 1.25em;
-    }
-
-    > ul > li {
-      font-size: 1.1em;
-    }
+  > li {
+    padding-left: 0;
+    margin-top: 1em;
+    font-size: 1.25em;
   }
 
-  .active {
-    color: #178ce6;
-    border-left: 3px solid #178ce6;
+  > ul > li {
+    font-size: 1.1em;
+  }
+}
 
-    a {
-      padding-left: 5px;
-      transition: padding-left 0.5s;
-    }
+.active {
+  color: #178ce6;
+  border-left: 3px solid #178ce6;
+
+  a {
+    padding-left: 5px;
+    transition: padding-left 0.5s;
+  }
+}
+
+.content {
+  .properties-table__name {
+    font-weight: bold;
   }
 
-  .content {
-    .properties-table__name {
-      font-weight: bold;
-    }
-
-    .properties-table__type {
-      white-space: nowrap;
-    }
+  .properties-table__type {
+    white-space: nowrap;
   }
+}
 </style>
 <script lang="ts" src="./Docs.ts"></script>

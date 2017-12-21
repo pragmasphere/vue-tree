@@ -3,9 +3,9 @@
 </template>
 
 <script>
-  export default {
-    components: {
-      VueTree
-    }
+export default {
+  components: {
+    VueTree
   }
+}
 </script>
