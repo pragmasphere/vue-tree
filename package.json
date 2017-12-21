@@ -18,6 +18,7 @@
     "tslint": "tslint -p . -s node_modules/custom-tslint-formatters/formatters -t grouped 'src/**/*.ts' 'test/unit/**/*.ts' 'test/e2e/*.ts'",
     "prepack": "npm run build",
     "build": "node build/build.lib.js && node build/build.js",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "postpublish": "npm run upload-docs",
     "upload-docs": "shx cp app/CNAME dist/ && gh-pages -d dist",
     "release": " npm run lint && npm run tslint && npm run test && npm run build && semantic-release"
