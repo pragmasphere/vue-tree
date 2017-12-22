@@ -13,6 +13,7 @@ export interface Theme {
 }
 
 export interface ThemeContext {
+  vm: any, // VueTreeNode model
   node: TreeNode
   label: string
   leaf: Boolean

@@ -355,6 +355,7 @@ vue.components('vue-tree', VueTree)</code></pre>
 
                       <pre class="col-xs-12" v-highlightjs><code class="javascript">export default {
   props: {
+    vm: Object, // The VueTreeNode component instance.
     node: Object, // The data of the node to display.
     leaf: Boolean, // Should the node be displayed as a leaf ?
     opened: Boolean, // Should the node be opened ?

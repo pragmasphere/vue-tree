@@ -146,6 +146,7 @@ export default Vue.extend({
     },
     themeContext (): ThemeContext {
       return {
+        vm: this,
         node: this.data,
         label: this.dataLabel,
         leaf: this.dataLeaf,
@@ -156,7 +157,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    toggleClicked () {
+    handleClicked () {
       if (!this.dataLeaf) {
         this.computedOpened = !this.computedOpened
       }

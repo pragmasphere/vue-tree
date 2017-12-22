@@ -19,6 +19,7 @@ import Vue from 'vue'
 
 export default Vue.extend({
   props: {
+    vm: Object, // The VueTreeNode component instance.
     node: Object, // The data of the node to display.
     label: String, // Label to display.
     leaf: Boolean, // Should the node be displayed as a leaf ?
