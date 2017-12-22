@@ -256,17 +256,17 @@ vue.components('vue-tree', VueTree)</code></pre>
                     </tr>
                     <tr>
                       <td class="properties-table__name">opened</td>
-                      <td class="properties-table__type"><code>Boolean</code></td>
-                      <td class="properties-table__default"><code>true</code></td>
-                      <td class="properties-table__description">Initial opened state used for all tree nodes.
+                      <td class="properties-table__type"><code>String</code></td>
+                      <td class="properties-table__default"><code>opened</code></td>
+                      <td class="properties-table__description">Property name from <code>data</code> objects used as
+                        opened state.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
-                      <td class="properties-table__type"><code>String</code></td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as
-                        opened state.
+                      <td class="properties-table__description">Initial opened state used for all tree nodes.
                       </td>
                     </tr>
                     <tr>
@@ -292,16 +292,16 @@ vue.components('vue-tree', VueTree)</code></pre>
                     </tr>
                     <tr>
                       <td class="properties-table__name">hidden</td>
-                      <td class="properties-table__type"><code>Boolean</code></td>
-                      <td class="properties-table__default"><code>false</code></td>
-                      <td class="properties-table__description">Initial hidden state used for all tree nodes.
+                      <td class="properties-table__type"><code>String</code></td>
+                      <td class="properties-table__default"><code>hidden</code></td>
+                      <td class="properties-table__description">Property name from <code>data</code> objects used as hidden state.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
-                      <td class="properties-table__type"><code>String</code></td>
-                      <td class="properties-table__default"><code>hidden</code></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as hidden state.
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Initial hidden state used for all tree nodes.
                       </td>
                     </tr>
                     <tr>
