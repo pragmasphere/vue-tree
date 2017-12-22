@@ -20,7 +20,7 @@
                        :hidden="hidden"
                        :label="label"
                        :leaf="leaf"
-                       :theme="theme">
+                       :theme="themeInstance">
         </vue-tree-node>
       </template>
       <component :is="themeInstance.afterChildren" v-if="themeInstance.afterChildren" v-bind="themeContext"></component>
