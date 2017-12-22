@@ -30,6 +30,10 @@
 .vue-tree__tree-node-handle {
   cursor: pointer;
   user-select: none;
+
+  &.vue-tree__tree-node-handle--disabled {
+    cursor: inherit;
+  }
 }
 </style>
 <script lang="ts" src="./VueTreeNode.ts"></script>
