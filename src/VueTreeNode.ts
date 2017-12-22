@@ -73,6 +73,14 @@ export default Vue.extend({
           this.computedOpened = openedGetter(this.data)
         }
       }
+    },
+    dataOpened: function (opened: boolean) {
+      if (isString(this.opened)) {
+        this.data[this.opened as string] = opened
+      } else if (isObject(this.opened) && 'set' in this.opened) {
+        const openedAccessor = this.opened as PropertyMapper<boolean>
+        openedAccessor.set(this.data, opened)
+      }
     }
   },
   computed: {
@@ -131,7 +139,6 @@ export default Vue.extend({
         } else {
           this.dataOpened = opened
         }
-        this.$emit('opened', this.data)
       }
     },
     themeInstance (): Theme {

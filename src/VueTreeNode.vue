@@ -1,8 +1,8 @@
 <template>
   <li class="vue-tree__tree-node" :class="{'vue-tree__tree-node--hidden': hidden}">
     <component :is="themeInstance.content" v-if="themeInstance.content" v-bind="themeContext"></component>
-    <span v-else class="vue-tree__tree-node-content" v-if="!!data && !hidden">
-      <span class="vue-tree__tree-node-handle" :class="{'vue-tree__tree-node-toggle--disabled': dataLeaf}"
+    <span class="vue-tree__tree-node-content" v-if="!themeInstance.content && !!data && !hidden">
+      <span class="vue-tree__tree-node-handle" :class="{'vue-tree__tree-node-handle--disabled': dataLeaf}"
             v-if="!childrenLoading" @click="handleClicked" :disabled="dataLeaf">
         <component :is="themeInstance.handle" v-if="themeInstance.handle" v-bind="themeContext"></component>
       </span>
