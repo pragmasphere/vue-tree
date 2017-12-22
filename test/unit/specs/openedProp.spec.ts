@@ -10,9 +10,8 @@ describe('Opened', () => {
       opened: 'opened',
       data: {
         label: 'Test',
-        opened: true,
         children: [{
-          label: 'Cat 1', opened: true, children: [
+          label: 'Cat 1', children: [
             { label: '#1' },
             { label: '#2' },
             { label: '#3' },
@@ -20,7 +19,7 @@ describe('Opened', () => {
           ]
         },
           {
-            label: 'Cat 2', children: [
+            label: 'Cat 2', opened: false, children: [
               { label: '#A' },
               { label: '#B' },
               { label: '#C' }

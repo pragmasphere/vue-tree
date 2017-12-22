@@ -224,13 +224,6 @@ vue.components('vue-tree', VueTree)</code></pre>
                       </td>
                     </tr>
                     <tr>
-                      <td class="properties-table__name">root-hidden</td>
-                      <td class="properties-table__type"><code>Boolean</code></td>
-                      <td class="properties-table__default"><code>false</code></td>
-                      <td class="properties-table__description">Hide the root node on the component view.
-                      </td>
-                    </tr>
-                    <tr>
                       <td class="properties-table__name">label</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>label</code></td>
@@ -263,15 +256,22 @@ vue.components('vue-tree', VueTree)</code></pre>
                     </tr>
                     <tr>
                       <td class="properties-table__name">opened</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default"><code>true</code></td>
+                      <td class="properties-table__description">Initial opened state used for all tree nodes.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>String</code></td>
-                      <td class="properties-table__default"><code>opened</code></td>
+                      <td class="properties-table__default"></td>
                       <td class="properties-table__description">Property name from <code>data</code> objects used as
                         opened state.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
-                      <td class="properties-table__type"><code>Function</code></td>
+                      <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
                       <td class="properties-table__default"></td>
                       <td class="properties-table__description">Function that returns initial opened state for given node.
                       </td>
@@ -291,16 +291,55 @@ vue.components('vue-tree', VueTree)</code></pre>
                       </td>
                     </tr>
                     <tr>
+                      <td class="properties-table__name">hidden</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default"><code>false</code></td>
+                      <td class="properties-table__description">Initial hidden state used for all tree nodes.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type"><code>String</code></td>
+                      <td class="properties-table__default"><code>hidden</code></td>
+                      <td class="properties-table__description">Property name from <code>data</code> objects used as hidden state.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Function that returns hidden state for given node.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type">
+                        <code>Object<br>{<br>
+                          &nbsp;&nbsp;get: (node: TreeNode): Boolean,<br>
+                          &nbsp;&nbsp;set: (node: TreeNode, hidden: Boolean): void<br>}
+                        </code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Object defining <code>get</code> and <code>set</code>
+                        functions for hidden state of given node. <code>get</code> function returns initial hidden state
+                        for given node, and <code>set</code> function is invoked to update the state into the node when
+                        user interacts with the component view.
+                      </td>
+                    </tr>
+                    <tr>
                       <td class="properties-table__name">theme</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>vanilla</code></td>
-                      <td class="properties-table__description">Activate a theme registered in the registry through it's name. See Themes section for more details</td>
+                      <td class="properties-table__description">Activate a theme registered in the registry through it's name. See Themes
+                        section for more details
+                      </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Object</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Activate a theme from its definition object. See Themes section for more details</td>
+                      <td class="properties-table__description">Activate a theme from its definition object. See Themes section for more
+                        details
+                      </td>
                     </tr>
                     </tbody>
                   </table>
@@ -311,7 +350,8 @@ vue.components('vue-tree', VueTree)</code></pre>
                 <div class="col-xs-12">
                   <h2>Theme</h2>
 
-                  <p>You can change the look of Vue Tree by setting the <code>theme</code> component property. Default themes are bundled with
+                  <p>You can change the look of Vue Tree by setting the <code>theme</code> component property. Default themes are bundled
+                    with
                     Vue Tree, and you can write your own if needed.</p>
 
                   <div class="row" data-scroll-spy-id="themes" v-scroll-spy>
@@ -322,10 +362,13 @@ vue.components('vue-tree', VueTree)</code></pre>
 
                       <ul>
                         <li><code>vanilla</code>: Display tree nodes with characters only</li>
-                        <li><code>fontAwesome</code>: Display tree nodes with <a href="http://fontawesome.io/" target="_blank">Font Awesome</a> icons</li>
+                        <li><code>fontAwesome</code>: Display tree nodes with <a href="http://fontawesome.io/" target="_blank">Font
+                          Awesome</a> icons
+                        </li>
                       </ul>
 
-                      <p>Default themes are already registered in the theme registry, so they are available using their name directly on the <code>theme</code> component property.</p>
+                      <p>Default themes are already registered in the theme registry, so they are available using their name directly on the
+                        <code>theme</code> component property.</p>
 
                       <vuep :template="examples.defaultThemes" :scope="scope"></vuep>
                     </div>
@@ -357,6 +400,7 @@ vue.components('vue-tree', VueTree)</code></pre>
   props: {
     vm: Object, // The VueTreeNode component instance.
     node: Object, // The data of the node to display.
+    hidden: Boolean, // Should the node be hidden ?
     leaf: Boolean, // Should the node be displayed as a leaf ?
     opened: Boolean, // Should the node be opened ?
     label: String, // Label to display.
@@ -365,11 +409,14 @@ vue.components('vue-tree', VueTree)</code></pre>
   }
 }</code></pre>
 
-                      <p>To start writing your own theme, you should copy sources from one of the default template and start modifying it.</p>
+                      <p>To start writing your own theme, you should copy sources from one of the default template and start modifying
+                        it.</p>
 
                       <ul>
-                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/vanilla" target="_blank">vanilla</a></li>
-                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/font-awesome" target="_blank">fontAwesome</a></li>
+                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/vanilla" target="_blank">vanilla</a>
+                        </li>
+                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/font-awesome" target="_blank">fontAwesome</a>
+                        </li>
                       </ul>
 
                       <p>When your theme is ready, you can set it to <code>theme</code> component property, or your can register it to

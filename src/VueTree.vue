@@ -4,7 +4,7 @@
                    :data="data"
                    :children-async="childrenAsync"
                    :children="children"
-                   :hidden="rootHidden"
+                   :hidden="hidden"
                    :opened="opened"
                    :label="label"
                    :leaf="leaf"

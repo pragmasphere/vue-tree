@@ -1,77 +1,37 @@
 import Vue from 'vue'
 
+import props from './props'
 import {
   AsyncTreeNodeChildrenLoader, PropertyGetter, PropertyMapper, TreeNode,
   TreeNodeChildrenLoader
 } from './vue-tree-types'
-import { isFunction, isObject, isString } from '@/utils'
-import { defaultRootNode, defaultTreeNodeChildrenLoader } from '@/defaults'
+import { isObject, isString, getPropertyValue } from '@/utils'
 import theme, { Theme, ThemeContext } from '@/theme'
 
 export default Vue.extend({
   name: 'VueTreeNode',
-  props: {
-    data: { // TreeNode
-      type: Object,
-      default: function () {
-        return defaultRootNode
-      }
-    },
-    children: { // TreeNodeChildrenLoader | AsyncTreeNodeChildrenLoader | string
-      type: [Function, String],
-      default: defaultTreeNodeChildrenLoader
-    },
-    childrenAsync: { // boolean
-      type: Boolean,
-      default: false
-    },
-    label: { // PropertyGetter<String> | String
-      type: [Function, String],
-      default: 'label'
-    },
-    leaf: { // PropertyGetter<boolean> | String
-      type: [Function, String],
-      default: 'leaf'
-    },
-    opened: { // PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean
-      type: [Object, Function, String, Boolean],
-      default: function () {
-        return true
-      }
-    },
-    hidden: { // boolean
-      type: Boolean,
-      default: false
-    },
-    theme: { // Theme | string
-      type: [Object, String],
-      default: () => 'vanilla'
-    }
-  },
+  props: props,
   data: function () {
     return {
       childrenError: null as any,
       childrenLoading: false as boolean,
       childrenLoaded: false as boolean,
       childrenNodes: null as TreeNode[] | null | undefined,
-      dataOpened: false as boolean
+      dataOpened: false as boolean,
+      dataHidden: false as boolean
     }
   },
   watch: {
     opened: {
       immediate: true,
-      handler: function (opened: PropertyMapper<boolean> | PropertyGetter<boolean> | String | Boolean) {
-        if (opened === true) {
-          this.computedOpened = opened as boolean
-        } else if (isString(opened)) {
-          this.computedOpened = this.data[opened as string] === true
-        } else if (isObject(opened) && 'get' in opened) {
-          const openedAccessor = opened as PropertyMapper<boolean>
-          this.computedOpened = openedAccessor.get(this.data)
-        } else if (isFunction(opened)) {
-          const openedGetter = opened as PropertyGetter<boolean>
-          this.computedOpened = openedGetter(this.data)
-        }
+      handler: function (opened: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
+        this.computedOpened = getPropertyValue(this.data, opened, true)
+      }
+    },
+    hidden: {
+      immediate: true,
+      handler: function (hidden: PropertyGetter<boolean> | String | boolean) {
+        this.dataHidden = getPropertyValue(this.data, hidden, false)
       }
     },
     dataOpened: function (opened: boolean) {
@@ -155,6 +115,7 @@ export default Vue.extend({
       return {
         vm: this,
         node: this.data,
+        hidden: this.dataHidden,
         label: this.dataLabel,
         leaf: this.dataLeaf,
         opened: this.computedOpened,

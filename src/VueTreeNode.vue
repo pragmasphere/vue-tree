@@ -1,7 +1,7 @@
 <template>
-  <li class="vue-tree__tree-node" :class="{'vue-tree__tree-node--hidden': hidden}">
+  <li class="vue-tree__tree-node" :class="{'vue-tree__tree-node--hidden': dataHidden}">
     <component :is="themeInstance.content" v-if="themeInstance.content" v-bind="themeContext"></component>
-    <span class="vue-tree__tree-node-content" v-if="!themeInstance.content && !!data && !hidden">
+    <span class="vue-tree__tree-node-content" v-if="!themeInstance.content && !!data && !dataHidden">
       <span class="vue-tree__tree-node-handle" :class="{'vue-tree__tree-node-handle--disabled': dataLeaf}"
             v-if="!childrenLoading" @click="handleClicked" :disabled="dataLeaf">
         <component :is="themeInstance.handle" v-if="themeInstance.handle" v-bind="themeContext"></component>
@@ -17,6 +17,7 @@
                        :children-async="childrenAsync"
                        :children="children"
                        :opened="opened"
+                       :hidden="hidden"
                        :label="label"
                        :leaf="leaf"
                        :theme="theme">

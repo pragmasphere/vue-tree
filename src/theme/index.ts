@@ -16,6 +16,7 @@ export interface ThemeContext {
   vm: any, // VueTreeNode model
   node: TreeNode
   label: string
+  hidden: Boolean
   leaf: Boolean
   opened: Boolean
   loading: Boolean
