@@ -1,14 +1,8 @@
 <template>
   <span class="vue-tree__theme-label--vanilla">
-    <span class="vue-tree__tree-node-status vue-tree__tree-node-status--loading" v-if="loading">
-      [?]
-    </span>
-    <span class="vue-tree__tree-node-status vue-tree__tree-node-status--error" v-if="error">
-      [!]
-    </span>
-    <span class="vue-tree__tree-node-label">
-      {{ label }}
-    </span>
+    <span class="vue-tree__tree-node-status vue-tree__tree-node-status--loading" v-if="loading">&#10067;</span>
+    <span class="vue-tree__tree-node-status vue-tree__tree-node-status--error" v-if="error">&#10071;</span>
+    <span class="vue-tree__tree-node-label">{{ label }}</span>
   </span>
 </template>
 <script lang="ts">

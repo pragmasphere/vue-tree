@@ -24,7 +24,7 @@ export interface ThemeContext {
 }
 
 class ThemesRegistry {
-  private themes: { [s: string]: Theme; }= {}
+  private themes: { [s: string]: Theme; } = {}
 
   register (name: string, theme: Theme) {
     this.themes[name] = theme
