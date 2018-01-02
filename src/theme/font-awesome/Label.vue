@@ -28,4 +28,7 @@ export default Vue.extend({
 })
 </script>
 <style lang="scss" scoped>
+.vue-tree__tree-node-handle {
+  font-weight: bold;
+}
 </style>

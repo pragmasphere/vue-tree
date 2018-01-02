@@ -27,7 +27,7 @@ export default Vue.extend({
 })
 </script>
 <style class="scss" scoped>
-vue-tree__theme-before-children--vanilla {
+.vue-tree__tree-node-status {
   font-weight: bold;
 }
 </style>
