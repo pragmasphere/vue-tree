@@ -114,19 +114,14 @@ describe('Opened', () => {
 
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(1)
 
-    return Vue.nextTick().then(() => {
-      expect(wrapper.vm.$props.data.children[0].opened).toBeFalsy()
+    expect(wrapper.vm.$props.data.children[0].opened).toBeFalsy()
 
-      wrapper.find('.vue-tree__tree-node-handle--closed').trigger('click')
+    wrapper.find('.vue-tree__tree-node-handle--closed').trigger('click')
 
-      expect(wrapper.text()).toContain('#1')
-      expect(wrapper.text()).toContain('#A')
-      expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(0)
+    expect(wrapper.text()).toContain('#1')
+    expect(wrapper.text()).toContain('#A')
 
-      return Vue.nextTick()
-    }).then(() => {
-      expect(wrapper.vm.$props.data.children[0].opened).toBeTruthy()
-    })
+    expect(wrapper.vm.$props.data.children[0].opened).toBeTruthy()
   })
 
   it('should get and set opened property into data when :opened="{get: ..., set: ...}"', () => {
@@ -166,19 +161,16 @@ describe('Opened', () => {
 
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(1)
 
-    return Vue.nextTick().then(() => {
-      expect(wrapper.vm.$props.data.children[0].opened).toBeFalsy()
+    expect(wrapper.vm.$props.data.children[0].opened).toBeFalsy()
 
-      wrapper.find('.vue-tree__tree-node-handle--closed').trigger('click')
+    wrapper.find('.vue-tree__tree-node-handle--closed').trigger('click')
 
-      expect(wrapper.text()).toContain('#1')
-      expect(wrapper.text()).toContain('#A')
-      expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(0)
+    expect(wrapper.text()).toContain('#1')
+    expect(wrapper.text()).toContain('#A')
+    expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(0)
 
-      return Vue.nextTick()
-    }).then(() => {
-      expect(wrapper.vm.$props.data.children[0].opened).toBeTruthy()
-    })
+
+    expect(wrapper.vm.$props.data.children[0].opened).toBeTruthy()
   })
 
   it('should get opened property into data when :opened="[function]"', () => {

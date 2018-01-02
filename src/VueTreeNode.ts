@@ -33,14 +33,6 @@ export default Vue.extend({
       handler: function (hidden: PropertyGetter<boolean> | String | boolean) {
         this.dataHidden = getPropertyValue(this.data, hidden, false)
       }
-    },
-    dataOpened: function (opened: boolean) {
-      if (isString(this.opened)) {
-        this.data[this.opened as string] = opened
-      } else if (isObject(this.opened) && 'set' in this.opened) {
-        const openedAccessor = this.opened as PropertyMapper<boolean>
-        openedAccessor.set(this.data, opened)
-      }
     }
   },
   computed: {
@@ -90,14 +82,14 @@ export default Vue.extend({
         if (opened && !this.childrenNodes) {
           if (this.childrenAsync) {
             this.loadChildrenAsync().then(() => {
-              this.dataOpened = opened
+              this.setDataOpened(opened)
             })
           } else {
             this.loadChildren()
-            this.dataOpened = opened
+            this.setDataOpened(opened)
           }
         } else {
-          this.dataOpened = opened
+          this.setDataOpened(opened)
         }
       }
     },
@@ -125,6 +117,15 @@ export default Vue.extend({
     }
   },
   methods: {
+    setDataOpened(opened: boolean) {
+      this.dataOpened = opened
+       if (isString(this.opened)) {
+        this.data[this.opened as string] = opened
+      } else if (isObject(this.opened) && 'set' in this.opened) {
+        const openedAccessor = this.opened as PropertyMapper<boolean>
+        openedAccessor.set(this.data, opened)
+      }
+    },
     handleClicked () {
       if (!this.dataLeaf) {
         this.computedOpened = !this.computedOpened
