@@ -10,7 +10,7 @@ export default Vue.extend(
     data: function () {
       return {
         examples,
-        scope: { VueTree }
+        scope: { VueTree, Vue }
       }
     }
   })
