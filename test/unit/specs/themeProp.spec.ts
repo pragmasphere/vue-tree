@@ -18,7 +18,7 @@ describe('Theme', () => {
     expect(wrapper.text()).toContain('Category #2')
     expect(wrapper.text()).toContain('Item #A')
 
-    expect(wrapper.html()).toContain('[-]')
+    expect(wrapper.html()).toContain('▼')
     expect(wrapper.html()).not.toContain('class="fa')
   })
 
@@ -37,7 +37,7 @@ describe('Theme', () => {
     expect(wrapper.text()).toContain('Category #2')
     expect(wrapper.text()).toContain('Item #A')
 
-    expect(wrapper.html()).not.toContain('[-]')
+    expect(wrapper.html()).not.toContain('▼')
     expect(wrapper.html()).toContain('class="fa')
   })
 })
