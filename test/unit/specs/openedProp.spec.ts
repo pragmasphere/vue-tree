@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 import { mount } from 'vue-test-utils'
 
 import VueTree from '@/index'
@@ -127,7 +129,7 @@ describe('Opened', () => {
     const propsData = {
       opened: {
         get: (data: TreeNode) => data.opened,
-        set: (data: TreeNode, value: boolean) => data.opened = value
+        set: (data: TreeNode, value: boolean) => Vue.set(data, 'opened', value)
       },
       data: {
         label: 'Test',

@@ -5,7 +5,7 @@ import {
   AsyncTreeNodeChildrenLoader, PropertyGetter, PropertyMapper, TreeNode,
   TreeNodeChildrenLoader
 } from './vue-tree-types'
-import { isObject, isString, getPropertyValue } from '@/utils'
+import { isString, getPropertyValue, setPropertyValue } from '@/utils'
 import theme, { Theme, ThemeContext } from '@/theme'
 
 export default Vue.extend({
@@ -18,7 +18,9 @@ export default Vue.extend({
       childrenLoaded: false as boolean,
       childrenNodes: null as TreeNode[] | null | undefined,
       dataOpened: false as boolean,
-      dataHidden: false as boolean
+      dataHidden: false as boolean,
+      dataSelectable: false as boolean,
+      dataSelected: false as boolean
     }
   },
   watch: {
@@ -32,6 +34,21 @@ export default Vue.extend({
       immediate: true,
       handler: function (hidden: PropertyGetter<boolean> | String | boolean) {
         this.dataHidden = getPropertyValue(this.data, hidden, false)
+      }
+    },
+    selectable: {
+      immediate: true,
+      handler: function (selectable: PropertyGetter<boolean> | String | boolean) {
+        this.dataSelectable = getPropertyValue(this.data, selectable, false)
+      }
+    },
+    dataSelected: function (selected: boolean) {
+      this.setDataSelected(selected)
+    },
+    selected: {
+      immediate: true,
+      handler: function (selected: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
+        this.dataSelected = getPropertyValue(this.data, selected, false)
       }
     }
   },
@@ -94,14 +111,7 @@ export default Vue.extend({
       }
     },
     themeInstance (): Theme {
-      if (typeof this.theme === 'string') {
-        let themeInstance = theme.get(this.theme)
-        if (!themeInstance) {
-          themeInstance = theme.getVanilla()
-        }
-        return themeInstance
-      }
-      return this.theme
+      return theme.get(this.theme)
     },
     themeContext (): ThemeContext {
       return {
@@ -111,6 +121,8 @@ export default Vue.extend({
         label: this.dataLabel,
         leaf: this.dataLeaf,
         opened: this.computedOpened,
+        selectable: this.dataSelectable,
+        selected: this.dataSelected,
         loading: this.childrenLoading,
         error: this.childrenError
       }
@@ -119,12 +131,11 @@ export default Vue.extend({
   methods: {
     setDataOpened (opened: boolean) {
       this.dataOpened = opened
-      if (isString(this.opened)) {
-        this.data[this.opened as string] = opened
-      } else if (isObject(this.opened) && 'set' in this.opened) {
-        const openedAccessor = this.opened as PropertyMapper<boolean>
-        openedAccessor.set(this.data, opened)
-      }
+      setPropertyValue(this.data, this.opened, opened)
+    },
+    setDataSelected (selected: boolean) {
+      this.dataSelected = selected
+      setPropertyValue(this.data, this.selected, selected)
     },
     handleClicked () {
       if (!this.dataLeaf) {

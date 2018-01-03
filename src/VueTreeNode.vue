@@ -6,6 +6,9 @@
             v-if="!childrenLoading" @click="handleClicked" :disabled="dataLeaf">
         <component :is="themeInstance.handle" v-if="themeInstance.handle" v-bind="themeContext"></component>
       </span>
+      <span class="vue-tree__tree-node-selection" v-if="dataSelectable">
+        <component :is="themeInstance.selection" v-if="themeInstance.selection" v-bind="themeContext"></component>
+      </span>
       <span class="vue-tree__tree-node-label">
         <component :is="themeInstance.label" v-if="themeInstance.label" v-bind="themeContext"></component>
       </span>
@@ -18,6 +21,8 @@
                        :children="children"
                        :opened="opened"
                        :hidden="hidden"
+                       :selectable="selectable"
+                       :selected="selected"
                        :label="label"
                        :leaf="leaf"
                        :theme="themeInstance">

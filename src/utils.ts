@@ -32,3 +32,12 @@ export function getPropertyValue<T> (data: any, property: PropertyMapper<T> | Pr
 
   return value
 }
+
+export function setPropertyValue<T> (data: any, property: PropertyMapper<T> | PropertyGetter<T> | String | T, value: T): void {
+  if (isString(property)) {
+    data[property as string] = value
+  } else if (isObject(property) && 'set' in (property as Object)) {
+    const openedAccessor = property as PropertyMapper<T>
+    openedAccessor.set(data, value)
+  }
+}

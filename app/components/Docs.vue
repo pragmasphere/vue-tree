@@ -34,9 +34,6 @@
               </li>
             </ul>
             <li>
-              <a>Properties</a>
-            </li>
-            <li>
               <a>Theme</a>
             </li>
             <ul data-scroll-spy-id="themes" v-scroll-spy-active v-scroll-spy-link>
@@ -48,13 +45,16 @@
               </li>
             </ul>
             <li>
-              <span class="tbd" title="To be done ...">Selection</span>
+              <a>Selection</a>
+            </li>
+            <li class="tbd" title="To be done ...">
+              <a>Edition</a>
+            </li>
+            <li class="tbd" title="To be done ...">
+              <a>Drag & Drop</a>
             </li>
             <li>
-              <span class="tbd" title="To be done ...">Edition</span>
-            </li>
-            <li>
-              <span class="tbd" title="To be done ...">Drag & Drop</span>
+              <a>Properties</a>
             </li>
           </ul>
         </nav>
@@ -174,6 +174,129 @@ vue.components('vue-tree', VueTree)</code></pre>
                     </div>
                   </div>
 
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <h2>Theme</h2>
+
+                  <p>You can change the look of Vue Tree by setting the <code>theme</code> component property. Default themes are bundled
+                    with
+                    Vue Tree, and you can write your own if needed.</p>
+
+                  <div class="row" data-scroll-spy-id="themes" v-scroll-spy>
+                    <div class="col-xs-12">
+                      <h3>Default themes</h3>
+
+                      <p>Vue Tree is bundled with 2 default themes</p>
+
+                      <ul>
+                        <li><code>vanilla</code>: Display tree nodes with characters only</li>
+                        <li><code>fontAwesome</code>: Display tree nodes with <a href="http://fontawesome.io/" target="_blank">Font
+                          Awesome</a> icons
+                        </li>
+                      </ul>
+
+                      <p>Default themes are already registered in the theme registry, so they are available using their name directly on the
+                        <code>theme</code> component property.</p>
+
+                      <vuep :template="examples.defaultThemes" :scope="scope"></vuep>
+                    </div>
+                    <div class="col-xs-12">
+                      <h3>Custom theme</h3>
+
+                      <p>To create your own Theme, you have to implement an object matching this interface.</p>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="javascript">export interface Theme {
+  handle: VueConstructor
+  label: VueConstructor
+  beforeChildren?: VueConstructor
+  afterChildren?: VueConstructor
+}</code></pre>
+
+                      <p>Each value in this object is a component that will be used to display a part of a tree node.</p>
+
+                      <ul>
+                        <li><code>handle</code> is used to render clickable handle area of the tree node.</li>
+                        <li><code>label</code> is used to render the label area of the tree node.</li>
+                        <li><code>beforeChildren</code> is optional and can be used to render anything before children of a node.</li>
+                        <li><code>afterChildren</code> is optional and can be used to render anything after children of a node.</li>
+                      </ul>
+
+                      <p>Each template component has access to node context through a defined set of props. That means that all template
+                        component should be declared with the following script:</p>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="javascript">export default {
+  props: {
+    vm: Object, // The VueTreeNode component instance.
+    node: Object, // The data of the node to display.
+    label: String, // Label to display.
+    hidden: Boolean, // Should the node be hidden ?
+    leaf: Boolean, // Should the node be displayed as a leaf ?
+    opened: Boolean, // Should the node be opened ?
+    selected: Boolean, // Should the node be selected ?
+    selectable: Boolean, // Should the node be selectable ?
+    loading: Boolean, // Is the node currently loading ?
+    error: Object // Contains the error object if an error occurs while loading the node.
+  }
+}</code></pre>
+
+                      <p>To start writing your own theme, you should copy sources from one of the default template and start modifying
+                        it.</p>
+
+                      <ul>
+                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/master/src/theme/vanilla" target="_blank">vanilla</a>
+                        </li>
+                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/master/src/theme/font-awesome" target="_blank">fontAwesome</a>
+                        </li>
+                      </ul>
+
+                      <p>When your theme is ready, you can set it to <code>theme</code> component property, or your can register it to
+                        theme registry for it to be available as a string like default themes.</p>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="javascript">import theme from '@pragmasphere/vue-tree/theme'
+
+theme.register('my-template', myTemplate)
+</code></pre>
+
+                      <pre class="col-xs-12" v-highlightjs><code class="html">&lt;vue-tree theme="my-template"&gt;&lt;/vue-tree&gt;
+</code></pre>
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <h2>Selection</h2>
+
+                  <p>Tree node selection can be enabled by setting <code>selectable</code> component property to <code>true</code>.</p>
+
+                  <p>By default, tree nodes are all unchecked, but this can be configured with <code>selected</code> component property.
+                    <code>selected</code> component property can be defined as a boolean (same selected state for each node), a string (property
+                    name used on data to get the selected state), a getter function (return selected state from data node) or an object
+                    defining both get and set functions.</p>
+
+                  <vuep :template="examples.selectableProperty" :scope="scope"></vuep>
+
+                </div>
+              </div>
+
+              <div class="row tbd">
+                <div class="col-xs-12">
+                  <h2>Edition</h2>
+                  <p>To be done ...</p>
+                </div>
+              </div>
+
+              <div class="row tbd">
+                <div class="col-xs-12">
+                  <h2>Drag & Drop</h2>
+                  <p>To be done ...</p>
                 </div>
               </div>
 
@@ -326,6 +449,64 @@ vue.components('vue-tree', VueTree)</code></pre>
                       </td>
                     </tr>
                     <tr>
+                      <td class="properties-table__name">selectable</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default">false</td>
+                      <td class="properties-table__description">Initial selectable state used for all tree nodes.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type"><code>String</code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Property name from <code>data</code> objects used as
+                        selectable state.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Function that returns initial selectable state for given node.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name">selected</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default">false</td>
+                      <td class="properties-table__description">Initial selected state used for all tree nodes.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type"><code>String</code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Property name from <code>data</code> objects used as
+                        selected state.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Function that returns initial selected state for given node.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name"></td>
+                      <td class="properties-table__type">
+                        <code>Object<br>{<br>
+                          &nbsp;&nbsp;get: (node: TreeNode): Boolean,<br>
+                          &nbsp;&nbsp;set: (node: TreeNode, selected: Boolean): void<br>}
+                        </code></td>
+                      <td class="properties-table__default"></td>
+                      <td class="properties-table__description">Object defining <code>get</code> and <code>set</code>
+                        functions for selected state of given node. <code>get</code> function returns initial selected state
+                        for given node, and <code>set</code> function is invoked to update the state into the node when
+                        user interacts with the component view.
+                      </td>
+                    </tr>
+                    <tr>
                       <td class="properties-table__name">theme</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>vanilla</code></td>
@@ -346,119 +527,6 @@ vue.components('vue-tree', VueTree)</code></pre>
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-xs-12">
-                  <h2>Theme</h2>
-
-                  <p>You can change the look of Vue Tree by setting the <code>theme</code> component property. Default themes are bundled
-                    with
-                    Vue Tree, and you can write your own if needed.</p>
-
-                  <div class="row" data-scroll-spy-id="themes" v-scroll-spy>
-                    <div class="col-xs-12">
-                      <h3>Default themes</h3>
-
-                      <p>Vue Tree is bundled with 2 default themes</p>
-
-                      <ul>
-                        <li><code>vanilla</code>: Display tree nodes with characters only</li>
-                        <li><code>fontAwesome</code>: Display tree nodes with <a href="http://fontawesome.io/" target="_blank">Font
-                          Awesome</a> icons
-                        </li>
-                      </ul>
-
-                      <p>Default themes are already registered in the theme registry, so they are available using their name directly on the
-                        <code>theme</code> component property.</p>
-
-                      <vuep :template="examples.defaultThemes" :scope="scope"></vuep>
-                    </div>
-                    <div class="col-xs-12">
-                      <h3>Custom theme</h3>
-
-                      <p>To create your own Theme, you have to implement an object matching this interface.</p>
-
-                      <pre class="col-xs-12" v-highlightjs><code class="javascript">export interface Theme {
-  handle: VueConstructor
-  label: VueConstructor
-  beforeChildren?: VueConstructor
-  afterChildren?: VueConstructor
-}</code></pre>
-
-                      <p>Each value in this object is a component that will be used to display a part of a tree node.</p>
-
-                      <ul>
-                        <li><code>handle</code> is used to render clickable handle area of the tree node.</li>
-                        <li><code>label</code> is used to render the label area of the tree node.</li>
-                        <li><code>beforeChildren</code> is optional and can be used to render anything before children of a node.</li>
-                        <li><code>afterChildren</code> is optional and can be used to render anything after children of a node.</li>
-                      </ul>
-
-                      <p>Each template component has access to node context through a defined set of props. That means that all template
-                        component should be declared with the following script:</p>
-
-                      <pre class="col-xs-12" v-highlightjs><code class="javascript">export default {
-  props: {
-    vm: Object, // The VueTreeNode component instance.
-    node: Object, // The data of the node to display.
-    hidden: Boolean, // Should the node be hidden ?
-    leaf: Boolean, // Should the node be displayed as a leaf ?
-    opened: Boolean, // Should the node be opened ?
-    label: String, // Label to display.
-    loading: Boolean, // Is the node currently loading ?
-    error: Object // Contains the error object if an error occurs while loading the node.
-  }
-}</code></pre>
-
-                      <p>To start writing your own theme, you should copy sources from one of the default template and start modifying
-                        it.</p>
-
-                      <ul>
-                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/vanilla" target="_blank">vanilla</a>
-                        </li>
-                        <li><a href="https://github.com/pragmasphere/vue-tree/tree/develop/src/theme/font-awesome" target="_blank">fontAwesome</a>
-                        </li>
-                      </ul>
-
-                      <p>When your theme is ready, you can set it to <code>theme</code> component property, or your can register it to
-                        theme registry for it to be available as a string like default themes.</p>
-
-                      <pre class="col-xs-12" v-highlightjs><code class="javascript">import theme from '@pragmasphere/vue-tree/theme'
-
-theme.register('my-template', myTemplate)
-</code></pre>
-
-                      <pre class="col-xs-12" v-highlightjs><code class="html">&lt;vue-tree theme="my-template"&gt;&lt;/vue-tree&gt;
-</code></pre>
-
-                    </div>
-                  </div>
-
-
-                </div>
-              </div>
-
-            </div>
-            <div>
-              <div class="row tbd">
-                <div class="col-xs-12">
-                  <h2>Selection</h2>
-                  <p>To be done ...</p>
-                </div>
-              </div>
-
-              <div class="row tbd">
-                <div class="col-xs-12">
-                  <h2>Edition</h2>
-                  <p>To be done ...</p>
-                </div>
-              </div>
-
-              <div class="row tbd">
-                <div class="col-xs-12">
-                  <h2>Drag & Drop</h2>
-                  <p>To be done ...</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -496,6 +564,10 @@ theme.register('my-template', myTemplate)
     cursor: pointer;
   }
 
+  .tbd a {
+    color: $gray-light;
+  }
+
   > li {
     padding-left: 0;
     margin-top: 1em;
@@ -510,6 +582,10 @@ theme.register('my-template', myTemplate)
 .active {
   color: #178ce6;
   border-left: 3px solid #178ce6;
+
+  &.tbd {
+    border-left: 3px solid $gray-light;
+  }
 
   a {
     padding-left: 5px;

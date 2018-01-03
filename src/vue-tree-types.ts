@@ -3,6 +3,8 @@ export interface TreeNode {
   label?: string
   opened?: boolean
   leaf?: boolean
+  selectable?: boolean
+  selected?: boolean
 }
 
 export interface PropertyGetter<T> {

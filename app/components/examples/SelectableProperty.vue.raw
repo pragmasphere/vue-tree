@@ -1,0 +1,32 @@
+<template>
+  <vue-tree :data="data"
+            :selectable="true"
+            selected="selected">
+  </vue-tree>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      data: {
+        label: 'Root',
+        children: [
+          { label: 'A', selected: true },
+          {
+            label: 'B', children: [
+              { label: 'B.1' },
+              { label: 'B.2', selected: true },
+              { label: 'B.3', selected: true }
+            ]
+          },
+          { label: 'C' }
+        ]
+      }
+    }
+  },
+  components: {
+    VueTree
+  }
+}
+</script>

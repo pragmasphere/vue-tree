@@ -19,6 +19,8 @@ export interface ThemeContext {
   hidden: Boolean
   leaf: Boolean
   opened: Boolean
+  selected: Boolean,
+  selectable: Boolean
   loading: Boolean
   error: any
 }
@@ -36,8 +38,8 @@ class ThemesRegistry {
     return theme
   }
 
-  get (name: string): Theme | undefined {
-    return this.themes[name]
+  get (theme: string | Theme): Theme {
+    return Object.assign({}, this.getVanilla(), typeof theme === 'string' ? this.themes[theme] : theme)
   }
 
   getVanilla (): Theme {

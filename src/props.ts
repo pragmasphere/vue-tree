@@ -35,8 +35,22 @@ export default {
       return false
     }
   },
+  selectable: {
+    type: [Function, String, Boolean], // PropertyGetter<boolean> | String | boolean
+    default: function () {
+      return false
+    }
+  },
+  selected: { // PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean
+    type: [Object, Function, String, Boolean],
+    default: function () {
+      return false
+    }
+  },
   theme: { // Theme | string
     type: [Object, String],
-    default: () => 'vanilla'
+    default: function () {
+      return 'vanilla'
+    }
   }
 }

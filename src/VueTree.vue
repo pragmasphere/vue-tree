@@ -6,6 +6,8 @@
                    :children="children"
                    :hidden="hidden"
                    :opened="opened"
+                   :selectable="selectable"
+                   :selected="selected"
                    :label="label"
                    :leaf="leaf"
                    :theme="theme"></vue-tree-node>
