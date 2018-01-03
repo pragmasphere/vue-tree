@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { mount } from 'vue-test-utils'
 
 import VueTree from '@/index'
@@ -168,7 +167,6 @@ describe('Opened', () => {
     expect(wrapper.text()).toContain('#1')
     expect(wrapper.text()).toContain('#A')
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(0)
-
 
     expect(wrapper.vm.$props.data.children[0].opened).toBeTruthy()
   })

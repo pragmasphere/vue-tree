@@ -117,9 +117,9 @@ export default Vue.extend({
     }
   },
   methods: {
-    setDataOpened(opened: boolean) {
+    setDataOpened (opened: boolean) {
       this.dataOpened = opened
-       if (isString(this.opened)) {
+      if (isString(this.opened)) {
         this.data[this.opened as string] = opened
       } else if (isObject(this.opened) && 'set' in this.opened) {
         const openedAccessor = this.opened as PropertyMapper<boolean>
