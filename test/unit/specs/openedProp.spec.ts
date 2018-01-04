@@ -4,6 +4,7 @@ import { mount } from 'vue-test-utils'
 
 import VueTree from '@/index'
 import { TreeNode } from '@/vue-tree-types'
+import { visibleText, visibleTreeNodes } from './utils'
 
 describe('Opened', () => {
   it('should open a closed node on click', () => {
@@ -33,17 +34,20 @@ describe('Opened', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
 
     expect(wrapper.contains('.vue-tree__tree-node.vue-tree__root > .vue-tree__tree-node-content')).toBe(true)
-    expect(wrapper.findAll('.vue-tree__tree-node-content')).toHaveLength(7)
-    expect(wrapper.text()).toContain('Test')
-    expect(wrapper.text()).toContain('Cat 1')
-    expect(wrapper.text()).toContain('Cat 2')
-    expect(wrapper.text()).toContain('#4')
-    expect(wrapper.text()).not.toContain('#A')
+    expect(visibleText(wrapper)).toContain('Test')
+    expect(visibleText(wrapper)).toContain('Cat 1')
+    expect(visibleText(wrapper)).toContain('Cat 2')
+    expect(visibleText(wrapper)).toContain('#4')
+    expect(visibleText(wrapper)).not.toContain('#A')
+
+    let visibleNodes = visibleTreeNodes(wrapper)
+    expect(visibleNodes).toHaveLength(7)
 
     wrapper.find('.vue-tree__tree-node-handle--closed').trigger('click')
-    expect(wrapper.text()).toContain('#A')
-    expect(wrapper.findAll('.vue-tree__tree-node-content')).toHaveLength(10)
+    expect(visibleText(wrapper)).toContain('#A')
 
+    visibleNodes = visibleTreeNodes(wrapper)
+    expect(visibleNodes).toHaveLength(10)
   })
 
   it('should close an opened node on click', () => {
@@ -73,10 +77,15 @@ describe('Opened', () => {
     const wrapper = mount(VueTree, { propsData })
     expect(wrapper.isVueInstance()).toBeTruthy()
 
+    let visibleNodes = visibleTreeNodes(wrapper)
+    expect(visibleNodes).toHaveLength(10)
+
     wrapper.findAll('.vue-tree__tree-node-handle--opened').at(1).trigger('click')
-    expect(wrapper.text()).not.toContain('#1')
-    expect(wrapper.text()).toContain('#A')
-    expect(wrapper.findAll('.vue-tree__tree-node-content')).toHaveLength(6)
+    expect(visibleText(wrapper)).not.toContain('#1')
+    expect(visibleText(wrapper)).toContain('#A')
+
+    visibleNodes = visibleTreeNodes(wrapper)
+    expect(visibleNodes).toHaveLength(6)
 
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(1)
   })
@@ -109,9 +118,12 @@ describe('Opened', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
 
     wrapper.findAll('.vue-tree__tree-node-handle--opened').at(1).trigger('click')
-    expect(wrapper.text()).not.toContain('#1')
-    expect(wrapper.text()).toContain('#A')
-    expect(wrapper.findAll('.vue-tree__tree-node-content')).toHaveLength(6)
+
+    expect(visibleText(wrapper)).not.toContain('#1')
+    expect(visibleText(wrapper)).toContain('#A')
+
+    let visibleNodes = visibleTreeNodes(wrapper)
+    expect(visibleNodes).toHaveLength(6)
 
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(1)
 
@@ -119,8 +131,8 @@ describe('Opened', () => {
 
     wrapper.find('.vue-tree__tree-node-handle--closed').trigger('click')
 
-    expect(wrapper.text()).toContain('#1')
-    expect(wrapper.text()).toContain('#A')
+    expect(visibleText(wrapper)).toContain('#1')
+    expect(visibleText(wrapper)).toContain('#A')
 
     expect(wrapper.vm.$props.data.children[0].opened).toBeTruthy()
   })
@@ -156,9 +168,12 @@ describe('Opened', () => {
     expect(wrapper.isVueInstance()).toBeTruthy()
 
     wrapper.findAll('.vue-tree__tree-node-handle--opened').at(1).trigger('click')
-    expect(wrapper.text()).not.toContain('#1')
-    expect(wrapper.text()).toContain('#A')
-    expect(wrapper.findAll('.vue-tree__tree-node-content')).toHaveLength(6)
+
+    let visibleNodes = visibleTreeNodes(wrapper)
+    expect(visibleNodes).toHaveLength(6)
+
+    expect(visibleText(wrapper)).not.toContain('#1')
+    expect(visibleText(wrapper)).toContain('#A')
 
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(1)
 
@@ -166,8 +181,8 @@ describe('Opened', () => {
 
     wrapper.find('.vue-tree__tree-node-handle--closed').trigger('click')
 
-    expect(wrapper.text()).toContain('#1')
-    expect(wrapper.text()).toContain('#A')
+    expect(visibleText(wrapper)).toContain('#1')
+    expect(visibleText(wrapper)).toContain('#A')
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(0)
 
     expect(wrapper.vm.$props.data.children[0].opened).toBeTruthy()
@@ -175,7 +190,9 @@ describe('Opened', () => {
 
   it('should get opened property into data when :opened="[function]"', () => {
     const propsData = {
-      opened: (data: TreeNode) => { return data.opened },
+      opened: (data: TreeNode) => {
+        return data.opened
+      },
       data: {
         label: 'Test',
         opened: true,
@@ -200,9 +217,11 @@ describe('Opened', () => {
     const wrapper = mount(VueTree, { propsData })
     expect(wrapper.isVueInstance()).toBeTruthy()
 
-    expect(wrapper.text()).not.toContain('#1')
-    expect(wrapper.text()).toContain('#A')
-    expect(wrapper.findAll('.vue-tree__tree-node-content')).toHaveLength(6)
+    expect(visibleText(wrapper)).not.toContain('#1')
+    expect(visibleText(wrapper)).toContain('#A')
+
+    let visibleNodes = visibleTreeNodes(wrapper)
+    expect(visibleNodes).toHaveLength(6)
 
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(1)
   })
