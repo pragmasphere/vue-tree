@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-sm-3 col-lg-2">
         <nav class="navbar navbar-default navbar-fixed-side">
-          <div class="navbar-brand">Vue Tree</div>
+          <div class="navbar-brand"><router-link :to="{name: 'Main'}">Vue Tree</router-link></div>
           <ul class="navbar__menu" v-scroll-spy-active="{selector: 'li'}" v-scroll-spy-link>
             <li>
               <a>Getting Started</a>
