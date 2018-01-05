@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { mount } from 'vue-test-utils'
 
 import VueTree from '@/index'
+import { VueTreeValueChangedEvent } from '@/events'
 
 describe('Children Property', () => {
   it('should handle data provided with children="nodes"', () => {
@@ -118,6 +119,54 @@ describe('Children Property', () => {
       expect(wrapper.text()).toContain('Cat #1')
       expect(wrapper.text()).toContain('Cat #2')
       expect(wrapper.text()).toContain('#A')
+    })
+  })
+
+  it('should emit loading events with :children="[function]" and :children-async="true"', () => {
+    const propsData = {
+      data: { label: 'Test' },
+      childrenAsync: true,
+      children: (parent: any) => {
+        if (parent.label === 'Test') {
+          return Promise.resolve([{ label: 'Cat #1' }, { label: 'Cat #2' }])
+        } else if (parent.label === 'Cat #1') {
+          return Promise.resolve([
+            { label: '#1' },
+            { label: '#2' },
+            { label: '#3' },
+            { label: '#4' }
+          ])
+        } else if (parent.label === 'Cat #2') {
+          return Promise.resolve([
+            { label: '#A' },
+            { label: '#B' },
+            { label: '#C' }
+          ])
+        }
+      }
+    }
+
+    const events: VueTreeValueChangedEvent<boolean>[] = []
+    const listeners = {
+      loading: (e: VueTreeValueChangedEvent<boolean>) => events.push(e)
+    }
+
+    const wrapper = mount(VueTree, { propsData, listeners })
+    expect(wrapper.isVueInstance()).toBeTruthy()
+
+    return Vue.nextTick().then(Vue.nextTick).then(Vue.nextTick).then(Vue.nextTick).then(function () {
+      expect(wrapper.contains('.vue-tree__tree-node.vue-tree__root > .vue-tree__tree-node-content')).toBe(true)
+      expect(wrapper.findAll('.vue-tree__tree-node-content')).toHaveLength(10)
+      expect(wrapper.text()).not.toContain('Vue Tree')
+      expect(wrapper.text()).not.toContain('Category #1')
+      expect(wrapper.text()).not.toContain('Category #2')
+      expect(wrapper.text()).not.toContain('Item #A')
+      expect(wrapper.text()).toContain('Test')
+      expect(wrapper.text()).toContain('Cat #1')
+      expect(wrapper.text()).toContain('Cat #2')
+      expect(wrapper.text()).toContain('#A')
+
+      expect(events.length).toBeGreaterThanOrEqual(1)
     })
   })
 })

@@ -5,6 +5,7 @@ import { mount } from 'vue-test-utils'
 import VueTree from '@/index'
 import { TreeNode } from '@/vue-tree-types'
 import { visibleText, visibleTreeNodes } from './utils'
+import { VueTreeValueChangedEvent } from '@/events'
 
 describe('Opened', () => {
   it('should open a closed node on click', () => {
@@ -88,6 +89,58 @@ describe('Opened', () => {
     expect(visibleNodes).toHaveLength(6)
 
     expect(wrapper.findAll('.vue-tree__tree-node-handle--closed')).toHaveLength(1)
+  })
+
+  it('should emit opened events properly', () => {
+    const propsData = {
+      opened: 'opened',
+      data: {
+        label: 'Test',
+        children: [{
+          label: 'Cat 1', children: [
+            { label: '#1' },
+            { label: '#2' },
+            { label: '#3' },
+            { label: '#4' }
+          ]
+        },
+          {
+            label: 'Cat 2', opened: false, children: [
+              { label: '#A' },
+              { label: '#B' },
+              { label: '#C' }
+            ]
+          }]
+      }
+    }
+
+    const events: VueTreeValueChangedEvent<boolean>[] = []
+    const listeners = {
+      opened: (e: VueTreeValueChangedEvent<boolean>) => events.push(e)
+    }
+
+    const wrapper = mount(VueTree, { propsData, listeners })
+    expect(wrapper.isVueInstance()).toBeTruthy()
+
+    expect(wrapper.contains('.vue-tree__tree-node.vue-tree__root > .vue-tree__tree-node-content')).toBe(true)
+    const node = wrapper.find('.vue-tree__tree-node-handle--closed')
+    node.trigger('click')
+
+    expect(events).toHaveLength(1)
+    expect(events[0].type).toEqual('opened')
+    expect(events[0].vm.$props.data.label).toEqual('Cat 2')
+    expect(events[0].data.label).toEqual('Cat 2')
+    expect(events[0].oldValue).toBeFalsy()
+    expect(events[0].value).toBeTruthy()
+
+    node.trigger('click')
+
+    expect(events).toHaveLength(2)
+    expect(events[1].type).toEqual('opened')
+    expect(events[1].vm.$props.data.label).toEqual('Cat 2')
+    expect(events[1].data.label).toEqual('Cat 2')
+    expect(events[1].oldValue).toBeTruthy()
+    expect(events[1].value).toBeFalsy()
   })
 
   it('should get and set "opened" property into data when opened="opened"', () => {
