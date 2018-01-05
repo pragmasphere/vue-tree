@@ -16,12 +16,12 @@ export interface ThemeContext {
   vm: any, // VueTreeNode model
   node: TreeNode
   label: string
-  hidden: Boolean
-  leaf: Boolean
-  opened: Boolean
-  selected: Boolean,
-  selectable: Boolean
-  loading: Boolean
+  hidden: boolean
+  leaf: boolean
+  opened: boolean
+  selected: boolean,
+  selectable: boolean
+  loading: boolean
   error: any
 }
 

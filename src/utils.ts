@@ -21,7 +21,7 @@ export function getFirstValue<T> (...values: T[]): T {
   return values[values.length - 1]
 }
 
-export function getPropertyValue<T> (data: any, property: PropertyMapper<T> | PropertyGetter<T> | String | T, defaultValueProvider: () => T): T {
+export function getPropertyValue<T> (data: any, property: PropertyMapper<T> | PropertyGetter<T> | String | T, defaultValueProvider?: () => T): T {
   let value: T
   if (isString(property)) {
     value = data[property as string]
@@ -35,7 +35,7 @@ export function getPropertyValue<T> (data: any, property: PropertyMapper<T> | Pr
     value = property as T
   }
 
-  if (value === undefined) {
+  if (value === undefined && defaultValueProvider) {
     return defaultValueProvider()
   }
 
@@ -49,4 +49,17 @@ export function setPropertyValue<T> (data: any, property: PropertyMapper<T> | Pr
     const openedAccessor = property as PropertyMapper<T>
     openedAccessor.set(data, value)
   }
+}
+
+export function getPropertyValueFactory<T> (vm: any,
+                                  valueProvider: () => T,
+                                  propertyName: string,
+                                  parentPropertyName: string,
+                                  defaultValue: T) {
+  /*
+  return getPropertyValue(this.data, opened,
+    () => getFirstValue(this.openedDefault, (this.$parent as any).computedOpened, true))
+  */
+  return () => getPropertyValue(vm.data, valueProvider(),
+    () => getFirstValue(vm[propertyName], vm.$parent[parentPropertyName], true))
 }

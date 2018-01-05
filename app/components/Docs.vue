@@ -56,6 +56,9 @@
             <li>
               <a>Properties</a>
             </li>
+            <li>
+              <a>Events</a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -560,6 +563,32 @@ theme.register('my-template', myTemplate)
                     </tr>
                     </tbody>
                   </table>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xs-12">
+                  <h2>Events</h2>
+
+                  <p>Vue tree support the following event types:</p>
+
+                  <ul>
+                    <li><code>selected</code></li>
+                    <li><code>opened</code></li>
+                  </ul>
+
+                  <p>All event types have the following payload object structure passed as a single argument.</p>
+
+                  <pre v-highlightjs><code class="javascript">{
+  type, // Event type
+  vm, // VueTreeNode component
+  data, // Data attached to the node
+  value, // New value
+  oldValue // Old value
+}</code></pre>
+
+                  <vuep :template="examples.events" :scope="scope"></vuep>
+
                 </div>
               </div>
 

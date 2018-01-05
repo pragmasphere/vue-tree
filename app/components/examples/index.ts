@@ -6,6 +6,7 @@ const asyncChildren = require('raw-loader!./AsyncChildren.vue.raw')
 const defaultThemes = require('raw-loader!./DefaultThemes.vue.raw')
 const selectableProperty = require('raw-loader!./SelectableProperty.vue.raw')
 const home = require('raw-loader!./Home.vue.raw')
+const events = require('raw-loader!./Events.vue.raw')
 
 export default {
   simple,
@@ -15,5 +16,6 @@ export default {
   asyncChildren,
   defaultThemes,
   selectableProperty,
-  home
+  home,
+  events
 }

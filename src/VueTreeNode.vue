@@ -1,6 +1,6 @@
 <template>
   <li class="vue-tree__tree-node"
-      :class="{'vue-tree__tree-node--hidden': dataHidden, 'vue-tree__tree-node--opened': computedOpened, 'vue-tree__tree-node--closed': !computedOpened}">
+      :class="{'vue-tree__tree-node--hidden': dataHidden, 'vue-tree__tree-node--opened': dataOpened, 'vue-tree__tree-node--closed': !dataOpened}">
     <component :is="themeInstance.content" v-if="themeInstance.content" v-bind="themeContext"></component>
     <span class="vue-tree__tree-node-content" v-if="!themeInstance.content && !!data && !dataHidden">
       <span class="vue-tree__tree-node-handle" :class="{'vue-tree__tree-node-handle--disabled': dataLeaf}"
@@ -17,8 +17,9 @@
     <ul class="vue-tree__tree-node-children">
       <component :is="themeInstance.beforeChildren" v-if="themeInstance.beforeChildren" v-bind="themeContext"></component>
       <template v-for="child of childrenNodes">
-        <vue-tree-node v-show="computedOpened"
-                       :class="{'vue-tree__tree-node--parent-opened': computedOpened, 'vue-tree__tree-node--parent-closed': !computedOpened}"
+        <vue-tree-node v-show="dataOpened"
+                       v-on="$listeners"
+                       :class="{'vue-tree__tree-node--parent-opened': dataOpened, 'vue-tree__tree-node--parent-closed': !dataOpened}"
                        :data="child"
                        :children-async="childrenAsync"
                        :children="children"

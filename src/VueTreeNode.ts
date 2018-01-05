@@ -10,53 +10,55 @@ import {
 } from './vue-tree-types'
 import { getFirstValue, getPropertyValue, isString, setPropertyValue } from '@/utils'
 import theme, { Theme, ThemeContext } from '@/theme'
+import { EventType, VueTreeValueChangedEvent } from '@/events'
 
 export default Vue.extend({
   name: 'VueTreeNode',
-  props: props,
+  props,
   data: function () {
     return {
       childrenError: null as any,
       childrenLoading: false as boolean,
       childrenLoaded: false as boolean,
       childrenNodes: null as TreeNode[] | null | undefined,
-      dataOpened: getFirstValue(this.openedDefault, (this.$parent as any).computedOpened, true) as boolean,
-      dataHidden: getFirstValue(this.hiddenDefault, (this.$parent as any).dataHidden, false) as boolean,
-      dataSelectable: getFirstValue(this.selectableDefault, (this.$parent as any).dataSelectable, false) as boolean,
-      dataSelected: getFirstValue(this.selectedDefault, (this.$parent as any).dataSelected, false) as boolean
+
+      dataOpened: getPropertyValue(this.data, this.opened,
+        () => getFirstValue(this.openedDefault, (this.$parent as any).dataOpened, true)) as boolean,
+      dataHidden: getPropertyValue(this.data, this.hidden,
+        () => getFirstValue(this.hiddenDefault, (this.$parent as any).dataHidden, false)) as boolean,
+      dataSelectable: getPropertyValue(this.data, this.selectable,
+        () => getFirstValue(this.selectableDefault, (this.$parent as any).dataSelectable, false)) as boolean,
+      dataSelected: getPropertyValue(this.data, this.selected,
+        () => getFirstValue(this.selectedDefault, (this.$parent as any).dataSelected, false) as boolean)
+    }
+  },
+  mounted () {
+    if (this.dataOpened) {
+      this.loadChildrenIfRequired(this.dataOpened, !this.dataOpened, false)
     }
   },
   watch: {
-    opened: {
-      immediate: true,
-      handler: function (opened: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
-        this.computedOpened = getPropertyValue(this.data, opened,
-          () => getFirstValue(this.openedDefault, (this.$parent as any).computedOpened, true))
-      }
+    dataOpened: function (value: boolean, oldValue: boolean) {
+      this.loadChildrenIfRequired(value, oldValue)
     },
-    hidden: {
-      immediate: true,
-      handler: function (hidden: PropertyGetter<boolean> | String | boolean) {
-        this.dataHidden = getPropertyValue(this.data, hidden,
-          () => getFirstValue(this.hiddenDefault, (this.$parent as any).dataHidden, false))
-      }
+    opened: function (opened: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
+      this.dataOpened = getPropertyValue(this.data, opened,
+        () => getFirstValue(this.openedDefault, (this.$parent as any).dataOpened, true))
     },
-    selectable: {
-      immediate: true,
-      handler: function (selectable: PropertyGetter<boolean> | String | boolean) {
-        this.dataSelectable = getPropertyValue(this.data, selectable,
-          () => getFirstValue(this.selectableDefault, (this.$parent as any).dataSelectable, false))
-      }
+    hidden: function (hidden: PropertyGetter<boolean> | String | boolean) {
+      this.dataHidden = getPropertyValue(this.data, hidden,
+        () => getFirstValue(this.hiddenDefault, (this.$parent as any).dataHidden, false))
     },
-    dataSelected: function (selected: boolean) {
-      this.setDataSelected(selected)
+    selectable: function (selectable: PropertyGetter<boolean> | String | boolean) {
+      this.dataSelectable = getPropertyValue(this.data, selectable,
+        () => getFirstValue(this.selectableDefault, (this.$parent as any).dataSelectable, false))
     },
-    selected: {
-      immediate: true,
-      handler: function (selected: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
-        this.dataSelected = getPropertyValue(this.data, selected,
-          () => getFirstValue(this.selectedDefault, (this.$parent as any).dataSelected, false))
-      }
+    dataSelected: function (value: boolean, oldValue: boolean) {
+      this.applyDataSelected(value, oldValue)
+    },
+    selected: function (selected: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
+      this.dataSelected = getPropertyValue(this.data, selected,
+        () => getFirstValue(this.selectedDefault, (this.$parent as any).dataSelected, false))
     }
   },
   computed: {
@@ -92,30 +94,11 @@ export default Vue.extend({
     dataLeaf (): boolean {
       if (!this.childrenAsync) {
         if (!this.childrenLoaded) {
-          this.loadChildren()
+          this.loadChildrenSync()
         }
         return !this.childrenNodes || this.childrenNodes.length <= 0
       }
       return this.dataLeafFromProperty
-    },
-    computedOpened: {
-      get: function (): boolean {
-        return this.dataOpened
-      },
-      set: function (opened: boolean) {
-        if (opened && !this.childrenNodes) {
-          if (this.childrenAsync) {
-            this.loadChildrenAsync().then(() => {
-              this.setDataOpened(opened)
-            })
-          } else {
-            this.loadChildren()
-            this.setDataOpened(opened)
-          }
-        } else {
-          this.setDataOpened(opened)
-        }
-      }
     },
     themeInstance (): Theme {
       return theme.get(this.theme)
@@ -127,7 +110,7 @@ export default Vue.extend({
         hidden: this.dataHidden,
         label: this.dataLabel,
         leaf: this.dataLeaf,
-        opened: this.computedOpened,
+        opened: this.dataOpened,
         selectable: this.dataSelectable,
         selected: this.dataSelected,
         loading: this.childrenLoading,
@@ -136,20 +119,52 @@ export default Vue.extend({
     }
   },
   methods: {
-    setDataOpened (opened: boolean) {
-      this.dataOpened = opened
-      setPropertyValue(this.data, this.opened, opened)
+    applyDataOpened (value: boolean, oldValue: boolean, emitEvent = true) {
+      setPropertyValue(this.data, this.opened, value)
+
+      if (emitEvent) {
+        this.$emit(EventType.opened.toString(), {
+          vm: this,
+          data: this.data,
+          value,
+          oldValue,
+          type: EventType.opened
+        } as VueTreeValueChangedEvent<boolean>)
+      }
     },
-    setDataSelected (selected: boolean) {
-      this.dataSelected = selected
-      setPropertyValue(this.data, this.selected, selected)
+    applyDataSelected (value: boolean, oldValue: boolean, emitEvent = true) {
+      setPropertyValue(this.data, this.selected, value)
+
+      if (emitEvent) {
+        this.$emit(EventType.selected.toString(), {
+          vm: this,
+          data: this.data,
+          value,
+          oldValue,
+          type: EventType.selected
+        } as VueTreeValueChangedEvent<boolean>)
+      }
     },
     handleClicked () {
       if (!this.dataLeaf) {
-        this.computedOpened = !this.computedOpened
+        this.dataOpened = !this.dataOpened
       }
     },
-    loadChildren (): TreeNode[] | null | undefined {
+    loadChildrenIfRequired (value: boolean, oldValue: boolean, emitEvent = true) {
+      if (value && !this.childrenNodes) {
+        if (this.childrenAsync) {
+          return this.loadChildrenAsync().then(() => {
+            this.applyDataOpened(value, oldValue, emitEvent)
+          })
+        } else {
+          this.loadChildrenSync()
+          this.applyDataOpened(value, oldValue, emitEvent)
+        }
+      } else {
+        this.applyDataOpened(value, oldValue, emitEvent)
+      }
+    },
+    loadChildrenSync (): TreeNode[] | null | undefined {
       if (this.dataLeafFromProperty) {
         return undefined
       }

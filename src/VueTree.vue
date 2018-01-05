@@ -1,6 +1,7 @@
 <template>
   <ul class="vue-tree">
     <vue-tree-node class="vue-tree__root vue-tree__tree-node--opened vue-tree__tree-node--parent-opened"
+                   v-on="$listeners"
                    :data="data"
                    :children-async="childrenAsync"
                    :children="children"

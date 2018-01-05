@@ -1,0 +1,49 @@
+<template>
+  <div>
+     <vue-tree :data="data"
+            :selectable="true"
+            @opened="onOpened"
+            @selected="onSelected">
+    </vue-tree>
+    <template v-for="event of events">
+      <span>{{ event.type }}: {{event.data.label}} => {{event.value}}</span>
+      <br/>
+    </template>
+  </div>
+
+</template>
+
+<script>
+export default {
+  methods: {
+    onOpened (e) {
+      this.events.splice(0, 0, e)
+    },
+    onSelected (e) {
+      this.events.splice(0, 0, e)
+    }
+  },
+  data () {
+    return {
+      events: [],
+      data: {
+        label: 'Root',
+        children: [
+          { label: 'A', selected: true },
+          {
+            label: 'B', children: [
+              { label: 'B.1' },
+              { label: 'B.2', selected: true },
+              { label: 'B.3', selected: true }
+            ]
+          },
+          { label: 'C' }
+        ]
+      }
+    }
+  },
+  components: {
+    VueTree
+  }
+}
+</script>
