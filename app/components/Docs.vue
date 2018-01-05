@@ -414,6 +414,15 @@ theme.register('my-template', myTemplate)
                       </td>
                     </tr>
                     <tr>
+                      <td class="properties-table__name">opened-default</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default"><code>true</code></td>
+                      <td class="properties-table__description">Default opened state value used for nodes that have a
+                        null or undefined value computed from <code>opened</code> component property.
+                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
+                      </td>
+                    </tr>
+                    <tr>
                       <td class="properties-table__name">hidden</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>hidden</code></td>
@@ -449,6 +458,15 @@ theme.register('my-template', myTemplate)
                       </td>
                     </tr>
                     <tr>
+                      <td class="properties-table__name">hidden-default</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default"><code>false</code></td>
+                      <td class="properties-table__description">Default hidden state value used for nodes that have a
+                        null or undefined value computed from <code>hidden</code> component property.
+                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
+                      </td>
+                    </tr>
+                    <tr>
                       <td class="properties-table__name">selectable</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default">false</td>
@@ -468,6 +486,15 @@ theme.register('my-template', myTemplate)
                       <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
                       <td class="properties-table__default"></td>
                       <td class="properties-table__description">Function that returns initial selectable state for given node.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name">selectable-default</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default"><code>false</code></td>
+                      <td class="properties-table__description">Default selectable state value used for nodes that have a
+                        null or undefined value computed from <code>selectable</code> component property.
+                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
                       </td>
                     </tr>
                     <tr>
@@ -504,6 +531,15 @@ theme.register('my-template', myTemplate)
                         functions for selected state of given node. <code>get</code> function returns initial selected state
                         for given node, and <code>set</code> function is invoked to update the state into the node when
                         user interacts with the component view.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="properties-table__name">selected-default</td>
+                      <td class="properties-table__type"><code>Boolean</code></td>
+                      <td class="properties-table__default"><code>false</code></td>
+                      <td class="properties-table__description">Default selected state value used for nodes that have a
+                        null or undefined value computed from <code>selected</code> component property.
+                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
                       </td>
                     </tr>
                     <tr>
@@ -596,6 +632,7 @@ theme.register('my-template', myTemplate)
 .content {
   .properties-table__name {
     font-weight: bold;
+    white-space: nowrap;
   }
 
   .properties-table__type {

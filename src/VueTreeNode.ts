@@ -2,10 +2,13 @@ import Vue from 'vue'
 
 import props from './props'
 import {
-  AsyncTreeNodeChildrenLoader, PropertyGetter, PropertyMapper, TreeNode,
+  AsyncTreeNodeChildrenLoader,
+  PropertyGetter,
+  PropertyMapper,
+  TreeNode,
   TreeNodeChildrenLoader
 } from './vue-tree-types'
-import { isString, getPropertyValue, setPropertyValue } from '@/utils'
+import { getFirstValue, getPropertyValue, isString, setPropertyValue } from '@/utils'
 import theme, { Theme, ThemeContext } from '@/theme'
 
 export default Vue.extend({
@@ -17,29 +20,32 @@ export default Vue.extend({
       childrenLoading: false as boolean,
       childrenLoaded: false as boolean,
       childrenNodes: null as TreeNode[] | null | undefined,
-      dataOpened: false as boolean,
-      dataHidden: false as boolean,
-      dataSelectable: false as boolean,
-      dataSelected: false as boolean
+      dataOpened: getFirstValue(this.openedDefault, (this.$parent as any).computedOpened, true) as boolean,
+      dataHidden: getFirstValue(this.hiddenDefault, (this.$parent as any).dataHidden, false) as boolean,
+      dataSelectable: getFirstValue(this.selectableDefault, (this.$parent as any).dataSelectable, false) as boolean,
+      dataSelected: getFirstValue(this.selectedDefault, (this.$parent as any).dataSelected, false) as boolean
     }
   },
   watch: {
     opened: {
       immediate: true,
       handler: function (opened: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
-        this.computedOpened = getPropertyValue(this.data, opened, true)
+        this.computedOpened = getPropertyValue(this.data, opened,
+          () => getFirstValue(this.openedDefault, (this.$parent as any).computedOpened, true))
       }
     },
     hidden: {
       immediate: true,
       handler: function (hidden: PropertyGetter<boolean> | String | boolean) {
-        this.dataHidden = getPropertyValue(this.data, hidden, false)
+        this.dataHidden = getPropertyValue(this.data, hidden,
+          () => getFirstValue(this.hiddenDefault, (this.$parent as any).dataHidden, false))
       }
     },
     selectable: {
       immediate: true,
       handler: function (selectable: PropertyGetter<boolean> | String | boolean) {
-        this.dataSelectable = getPropertyValue(this.data, selectable, false)
+        this.dataSelectable = getPropertyValue(this.data, selectable,
+          () => getFirstValue(this.selectableDefault, (this.$parent as any).dataSelectable, false))
       }
     },
     dataSelected: function (selected: boolean) {
@@ -48,7 +54,8 @@ export default Vue.extend({
     selected: {
       immediate: true,
       handler: function (selected: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
-        this.dataSelected = getPropertyValue(this.data, selected, false)
+        this.dataSelected = getPropertyValue(this.data, selected,
+          () => getFirstValue(this.selectedDefault, (this.$parent as any).dataSelected, false))
       }
     }
   },

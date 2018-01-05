@@ -5,9 +5,13 @@
                    :children-async="childrenAsync"
                    :children="children"
                    :hidden="hidden"
+                   :hidden-default="hiddenDefault"
                    :opened="opened"
+                   :opened-default="openedDefault"
                    :selectable="selectable"
+                   :selectable-default="selectableDefault"
                    :selected="selected"
+                   :selected-default="selectedDefault"
                    :label="label"
                    :leaf="leaf"
                    :theme="theme"></vue-tree-node>

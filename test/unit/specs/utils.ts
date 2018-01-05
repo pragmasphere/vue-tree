@@ -3,7 +3,7 @@ import VueTreeNode from '@/VueTreeNode.vue'
 
 import { createWrapperArray, Wrapper, WrapperArray } from 'vue-test-utils'
 
-export function isVisible(wrapper: Wrapper<any>) {
+export function isVisible (wrapper: Wrapper<any>) {
   const computedStyle = window.getComputedStyle(wrapper.element)
   return computedStyle.display !== 'none'
 }

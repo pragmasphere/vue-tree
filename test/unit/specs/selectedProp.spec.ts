@@ -256,31 +256,29 @@ describe('Selected', () => {
     expect(checkedInput.element.parentElement!.parentElement!.parentElement!.textContent).toEqual('✖    #A')
 
     return Vue.nextTick().then(() => {
-      return Vue.nextTick().then(() => {
-        checkedInput.trigger('click')
+      checkedInput.trigger('click')
 
-        let otherInput = wrapper.findAll('input.vue-tree__selected-checkbox').at(2)
-        otherInput.trigger('click')
+      let otherInput = wrapper.findAll('input.vue-tree__selected-checkbox').at(2)
+      otherInput.trigger('click')
 
-        expect(wrapper.findAll('input.vue-tree__selected-checkbox:checked')).toHaveLength(1)
-        expect(wrapper.vm.$props.data).toEqual({
-          label: 'Test',
-          children: [{
-            label: 'Cat #1', children: [
-              { label: '#1', selected: true },
-              { label: '#2' },
-              { label: '#3' },
-              { label: '#4' }
-            ]
-          },
-          {
-            label: 'Cat #2', children: [
-              { label: '#A', selected: false },
-              { label: '#B' },
-              { label: '#C' }
-            ]
-          }]
-        })
+      expect(wrapper.findAll('input.vue-tree__selected-checkbox:checked')).toHaveLength(1)
+      expect(wrapper.vm.$props.data).toEqual({
+        label: 'Test',
+        children: [{
+          label: 'Cat #1', children: [
+            { label: '#1', selected: true },
+            { label: '#2' },
+            { label: '#3' },
+            { label: '#4' }
+          ]
+        },
+        {
+          label: 'Cat #2', children: [
+            { label: '#A', selected: false },
+            { label: '#B' },
+            { label: '#C' }
+          ]
+        }]
       })
     })
   })

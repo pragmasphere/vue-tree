@@ -23,17 +23,25 @@ export default {
     type: [Function, String],
     default: 'leaf'
   },
+  hidden: { // PropertyGetter<boolean> | String | boolean
+    type: [Function, String, Boolean],
+    default: function () {
+      return false
+    }
+  },
+  hiddenDefault: { // boolean
+    type: Boolean,
+    default: false
+  },
   opened: { // PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean
     type: [Object, Function, String, Boolean],
     default: function () {
       return true
     }
   },
-  hidden: { // PropertyGetter<boolean> | String | boolean
-    type: [Function, String, Boolean],
-    default: function () {
-      return false
-    }
+  openedDefault: { // boolean
+    type: Boolean,
+    default: true
   },
   selectable: {
     type: [Function, String, Boolean], // PropertyGetter<boolean> | String | boolean
@@ -41,11 +49,19 @@ export default {
       return false
     }
   },
+  selectableDefault: { // boolean
+    type: Boolean,
+    default: false
+  },
   selected: { // PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean
     type: [Object, Function, String, Boolean],
     default: function () {
       return false
     }
+  },
+  selectedDefault: { // boolean
+    type: Boolean,
+    default: false
   },
   theme: { // Theme | string
     type: [Object, String],

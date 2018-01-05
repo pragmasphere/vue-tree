@@ -12,7 +12,16 @@ export function isFunction (val: any): boolean {
   return typeof val === 'function'
 }
 
-export function getPropertyValue<T> (data: any, property: PropertyMapper<T> | PropertyGetter<T> | String | T, defaultValue: T): T {
+export function getFirstValue<T> (...values: T[]): T {
+  for (const value of values) {
+    if (value !== undefined && value !== null) {
+      return value
+    }
+  }
+  return values[values.length - 1]
+}
+
+export function getPropertyValue<T> (data: any, property: PropertyMapper<T> | PropertyGetter<T> | String | T, defaultValueProvider: () => T): T {
   let value: T
   if (isString(property)) {
     value = data[property as string]
@@ -27,7 +36,7 @@ export function getPropertyValue<T> (data: any, property: PropertyMapper<T> | Pr
   }
 
   if (value === undefined) {
-    return defaultValue
+    return defaultValueProvider()
   }
 
   return value
