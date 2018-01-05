@@ -1,0 +1,69 @@
+<template>
+  <vue-tree
+    theme="fontAwesome"
+    :selectable="true"
+    :data="data"
+    label="label"
+    children="children"
+    opened="opened"
+    selected="selected"
+    selectable="selectable">
+  </vue-tree>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      data: {
+        label: 'Vue Tree',
+        selectable: false,
+        children: [
+          { label: 'Data',
+            children: [
+              { label: 'From any source', children: [
+                  { label: 'Thanks to configurable property names' },
+                ]
+              },
+              { label: 'Synchronously', opened: false, children: [
+                  { label: 'Configurable property containing TreeNode[]' },
+                  { label: 'Function returning TreeNode[]' }
+                ]
+              },
+              { label: 'Asynchronously', opened: false, children: [
+                  { label: 'Function returning Promise<TreeNode[]>' }
+                ]
+              }
+            ]
+          },
+          { label: 'Initial state',
+            opened: false,
+            selected: true,
+            children: [
+              { label: 'Thanks ! I really thought nobody would ever open me :)' },
+            ]
+          },
+          { label: 'Selection',
+            children: [
+              { label: '#1', selectable: true },
+              { label: '#2', selectable: true, selected: true },
+              { label: '#3', selectable: true, selected: true },
+              { label: 'Not selectable', selectable: false },
+            ]
+          },
+          { label: 'Themes',
+            children: [
+              { label: 'Vanilla (Unicode Symbols)' },
+              { label: 'FontAwesome' },
+              { label: 'Custom (Component based theming)' }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  components: {
+    VueTree
+  }
+}
+</script>

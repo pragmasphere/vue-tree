@@ -23,21 +23,13 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-4">
-        <div class="well well-sm sample-tree-container">
-          <vue-tree theme="fontAwesome"></vue-tree>
-        </div>
-      </div>
+      <vuep :template="examples.home" :scope="scope"></vuep>
     </div>
   </div>
 </template>
 <style lang="scss">
 .badges {
   padding-bottom: 1em;
-}
-
-.sample-tree-container {
-  height: 14em;
 }
 </style>
 <script lang="ts" src="./Main.ts"></script>
