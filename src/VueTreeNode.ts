@@ -59,6 +59,9 @@ export default Vue.extend({
     selected: function (selected: PropertyMapper<boolean> | PropertyGetter<boolean> | String | boolean) {
       this.dataSelected = getPropertyValue(this.data, selected,
         () => getFirstValue(this.selectedDefault, (this.$parent as any).dataSelected, false))
+    },
+    childrenLoading: function (value: boolean, oldValue: boolean) {
+      this.applyChildrenLoading(value, oldValue)
     }
   },
   computed: {
@@ -123,7 +126,7 @@ export default Vue.extend({
       setPropertyValue(this.data, this.opened, value)
 
       if (emitEvent) {
-        this.$emit(EventType.opened.toString(), {
+        this.$emit(EventType.opened, {
           vm: this,
           data: this.data,
           value,
@@ -136,12 +139,23 @@ export default Vue.extend({
       setPropertyValue(this.data, this.selected, value)
 
       if (emitEvent) {
-        this.$emit(EventType.selected.toString(), {
+        this.$emit(EventType.selected, {
           vm: this,
           data: this.data,
           value,
           oldValue,
           type: EventType.selected
+        } as VueTreeValueChangedEvent<boolean>)
+      }
+    },
+    applyChildrenLoading (value: boolean, oldValue: boolean, emitEvent = true) {
+      if (emitEvent) {
+        this.$emit(EventType.loading, {
+          vm: this,
+          data: this.data,
+          value,
+          oldValue,
+          type: EventType.loading
         } as VueTreeValueChangedEvent<boolean>)
       }
     },

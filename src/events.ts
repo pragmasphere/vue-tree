@@ -3,6 +3,7 @@ import { TreeNode } from '@/vue-tree-types'
 
 export enum EventType {
   opened = 'opened',
+  loading = 'loading',
   selected = 'selected'
 }
 
