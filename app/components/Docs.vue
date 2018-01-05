@@ -20,21 +20,21 @@
               </li>
             </ul>
             <li>
-              <a>Load data</a>
+              <a>Load Data</a>
             </li>
             <ul data-scroll-spy-id="load-data" v-scroll-spy-active v-scroll-spy-link>
               <li>
-                <a>Default data structure</a>
+                <a>Default Properties</a>
               </li>
               <li>
-                <a>Custom data structure</a>
+                <a>Custom Properties</a>
               </li>
               <li>
-                <a>Async loading function</a>
+                <a>Async Fetching</a>
               </li>
             </ul>
             <li>
-              <a>Theme</a>
+              <a>Themes</a>
             </li>
             <ul data-scroll-spy-id="themes" v-scroll-spy-active v-scroll-spy-link>
               <li>
@@ -90,7 +90,7 @@
             <div v-scroll-spy>
               <div class="row">
                 <div class="col-xs-12">
-                  <h2>Getting Started</h2>
+                  <h2 id="getting-started">Getting Started</h2>
 
                   <div data-scroll-spy-id="getting-started" v-scroll-spy>
                     <div class="row">
@@ -102,12 +102,12 @@
                     <div class="row">
                       <div class="col-xs-12">
                         <h3>Configure</h3>
-                        <pre class="col-xs-6" v-highlightjs><code class="javascript">import vue from 'Vue'
+                        <pre class="col-xs-6" v-highlightjs><code class="javascript">import Vue from 'vue'
 
 import VueTree from '@pragmasphere/vue-tree'
 import '@pragmasphere/vue-tree/lib/vue-tree.css'
 
-vue.components('vue-tree', VueTree)</code></pre>
+Vue.components('vue-tree', VueTree)</code></pre>
                       </div>
                     </div>
                     <div class="row">
@@ -122,53 +122,60 @@ vue.components('vue-tree', VueTree)</code></pre>
 
               <div class="row">
                 <div class="col-xs-12">
-                  <h2>Load data</h2>
+                  <h2 id="load-data">Load Data</h2>
 
-                  <p>You can load data into tree by using synchronous data loaded in an object, or using a function
-                    returning children object from a parent object.</p>
+                  <p>Data displayed in the component should be defined as an object hierarchy of TreeNode objects. Each
+                    TreeNode object contains data used to display a TreeNode in the component and control it's state.</p>
 
-                  <p>It's possible to load data asynchronously with ES2017 async/await or ES2015 Promise.</p>
+                  <p>Children TreeNode objects can be defined right on the parent TreeNode in a property. They can
+                    also be fetched synchronously from a function returning an array of TreeNode, or asynchronously
+                    from ES2017 async/await function or ES2015 Promise function.</p>
 
                   <p>
-                    Property names used by those objects can be configured so you can adjust the component to existing
-                    data.
+                    Property names declared on TreeNode objects can all be configured so you can load any data source
+                    in the component without mutating it.
                   </p>
 
                   <div class="row" data-scroll-spy-id="load-data" v-scroll-spy>
                     <div class="col-xs-12">
-                      <h3>Default data structure</h3>
+                      <h3>Default Properties</h3>
 
-                      <p>You can set an object matching your tree structure to the <code>data</code> component property.
-                        This object should at least have <code>label</code> and <code>children</code> properties.</p>
+                      <p>A root TreeNode object should be set to the <code>data</code> component property.</p>
+                      <p>By default, TreeNode objects should at least have <code>label</code> and <code>children</code>
+                        properties.</p>
 
                       <ul>
                         <li>
-                          <code>label</code> is used as the label of the node
+                          <code>label</code> is used to display the label of the TreeNode objects.
                         </li>
                         <li>
-                          <code>children</code> is an array of children tree objects.
+                          <code>children</code> is an array of children TreeNode objects.
                         </li>
                       </ul>
 
                       <vuep :template="examples.defaultObjectProperties" :scope="scope"></vuep>
+
+                      <p>Others properties are available, like <code>opened</code>, <code>selectable</code> or
+                        <code>selected</code> to control the state of each displayed TreeNode.</p>
                     </div>
                     <div class="col-xs-12">
-                      <h3>Custom data structure</h3>
+                      <h3>Custom Properties</h3>
 
-                      <p>If for some reason, you need to use other property names for your tree object, you can customize
-                        those names with <code>label</code> and <code>children</code> component properties</p>
+                      <p>If you need to use other property names for your TreeNode objects, you can customize
+                        these with <code>label</code> and <code>children</code> component properties</p>
 
                       <vuep :template="examples.customObjectProperties" :scope="scope"></vuep>
 
-                      <p>Those component properties can also accept a function to implement complex behaviors</p>
+                      <p>Most of supported component properties can also accept a function to implement advanced data
+                        loading. See <a href="#">Properties section</a> for a detailed list of supported properties.</p>
 
                       <vuep :template="examples.functionalObjectProperties" :scope="scope"></vuep>
                     </div>
                     <div class="col-xs-12">
-                      <h3>Async loading function</h3>
+                      <h3>Async Fetching</h3>
 
                       <p>You can set <code>children-async</code> to <code>true</code> and define <code>children</code>
-                        to an async function returning children for them to be loaded asynchronously.
+                        to an async function returning children to fetch them asynchronously.
 
                       <p>You can use either ES2017 async/await or ES2015 Promise to implement the children loading
                         function.</p>
@@ -182,27 +189,26 @@ vue.components('vue-tree', VueTree)</code></pre>
 
               <div class="row">
                 <div class="col-xs-12">
-                  <h2>Theme</h2>
+                  <h2 id="themes">Themes</h2>
 
-                  <p>You can change the look of Vue Tree by setting the <code>theme</code> component property. Default themes are bundled
-                    with
-                    Vue Tree, and you can write your own if needed.</p>
+                  <p>You can change the look of Vue Tree with <code>theme</code> component property. Default themes
+                    are bundled with distribution and you can write your own if needed.</p>
 
                   <div class="row" data-scroll-spy-id="themes" v-scroll-spy>
                     <div class="col-xs-12">
                       <h3>Default themes</h3>
 
-                      <p>Vue Tree is bundled with 2 default themes</p>
+                      <p>Vue Tree is bundled with some default themes</p>
 
                       <ul>
-                        <li><code>vanilla</code>: Display tree nodes with characters only</li>
-                        <li><code>fontAwesome</code>: Display tree nodes with <a href="http://fontawesome.io/" target="_blank">Font
-                          Awesome</a> icons
+                        <li><code>vanilla</code>: Unicode characters only.</li>
+                        <li><code>fontAwesome</code>: <a href="http://fontawesome.io/" target="_blank">Font Awesome</a>
+                          icons.
                         </li>
                       </ul>
 
-                      <p>Default themes are already registered in the theme registry, so they are available using their name directly on the
-                        <code>theme</code> component property.</p>
+                      <p>Default themes are registered in a theme registry, so they are available using their name
+                        right on the <code>theme</code> component property.</p>
 
                       <vuep :template="examples.defaultThemes" :scope="scope"></vuep>
                     </div>
@@ -275,7 +281,7 @@ theme.register('my-template', myTemplate)
 
               <div class="row">
                 <div class="col-xs-12">
-                  <h2>Selection</h2>
+                  <h2 id="selection">Selection</h2>
 
                   <p>Tree node selection can be enabled by setting <code>selectable</code> component property to <code>true</code>.</p>
 
@@ -291,22 +297,25 @@ theme.register('my-template', myTemplate)
 
               <div class="row tbd">
                 <div class="col-xs-12">
-                  <h2>Edition</h2>
+                  <h2 id="edition">Edition</h2>
                   <p>To be done ...</p>
                 </div>
               </div>
 
               <div class="row tbd">
                 <div class="col-xs-12">
-                  <h2>Drag & Drop</h2>
+                  <h2 id="drag-and-drop">Drag & Drop</h2>
                   <p>To be done ...</p>
                 </div>
               </div>
 
               <div class="row">
                 <div class="col-xs-12">
-                  <h2>Properties</h2>
+                  <h2 id="properties">Properties</h2>
 
+                  <p>The following table show details of each supported Vue Tree component properties.</p>
+                  <p>Most properties supports multiple input types that implements different behaviours of the same
+                    feature.</p>
 
                   <table class="table table-striped properties-table">
                     <thead>
@@ -322,84 +331,89 @@ theme.register('my-template', myTemplate)
                       <td class="properties-table__name">data</td>
                       <td class="properties-table__type"><code>Object</code></td>
                       <td class="properties-table__default">Dummy</td>
-                      <td class="properties-table__description">Data to display.</td>
+                      <td class="properties-table__description">Root TreeNode object to load.</td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">children</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>children</code></td>
-                      <td class="properties-table__description">Property name to use on <code>data</code> objects to
-                        display children.
+                      <td class="properties-table__description">Property name of TreeNode objects that should contain an
+                        array of children TreeNode objects.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function (node: TreeNode): TreeNode[]</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description"><p>Function that returns an array of children data
-                        objects to be displayed.</p>
-                        <p>When used with <code>:children-async="true"</code>, it may return a Promise (ES2015) or be
-                          defined as an async function (ES2017).</p>
+                      <td class="properties-table__description"><p>Function that fetch an array of children
+                        TreeNode objects from TreeNode passed as argument.</p>
+                        <p>When used with <code>:children-async="true"</code>, it should return a Promise (ES2015) or
+                          be defined as an async function (ES2017).</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">children-async</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"><code>false</code></td>
-                      <td class="properties-table__description">Enable async fetching of children.
+                      <td class="properties-table__description"><p>Enable async fetching of children.</p>
+                        <p> When <code>true</code>, <code>children</code> component property should be defined to a
+                          Promise (ES2015) or an async function (ES2017).</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">label</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>label</code></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as
-                        label.
+                      <td class="properties-table__description">Property name of TreeNode objects that should contain
+                        label of the item.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function (node: TreeNode): String</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Function that returns the label for given node.
+                      <td class="properties-table__description">Function that fetch the label from TreeNode argument.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">leaf</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>leaf</code></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as leaf
-                        property. If node is leaf, it's children won't be fetched.
+                      <td class="properties-table__description">Property name from TreeNode objects used as leaf
+                        property. When node is a leaf, it's children won't be fetched. When node has no children, it
+                        will also be displayed as leaf.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function (node: TreeNode): String</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Function that returns the leaf property for given node.
-                        If node is leaf, it's children won't be fetched.
+                      <td class="properties-table__description">Function returning the leaf property from TreeNode
+                        argument. When node is leaf, it's children won't be fetched. When node has no children, it will
+                        also be displayed as leaf.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">opened</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>opened</code></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as
-                        opened state.
+                      <td class="properties-table__description">Property name of TreeNode objects that should contain
+                        opened state of the item.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Initial opened state used for all tree nodes.
+                      <td class="properties-table__description">Initial opened state of all TreeNode objects.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Function that returns initial opened state for given node.
+                      <td class="properties-table__description">Function returning initial opened state from TreeNode
+                        argument.
                       </td>
                     </tr>
                     <tr>
@@ -410,40 +424,44 @@ theme.register('my-template', myTemplate)
                           &nbsp;&nbsp;set: (node: TreeNode, opened: Boolean): void<br>}
                         </code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Object defining <code>get</code> and <code>set</code>
-                        functions for opened state of given node. <code>get</code> function returns initial opened state
-                        for given node, and <code>set</code> function is invoked to update the state into the node when
-                        user interacts with the component view.
+                      <td class="properties-table__description"><p>Object defining <code>get</code> and <code>set</code>
+                        functions for opened state.</p>
+                        <p><code>get</code> function returns initial hidden state for TreeNode argument.</p>
+                        <p><code>set</code> function is invoked to update state of TreeNode argument when user
+                          interacts with the component.</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">opened-default</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"><code>true</code></td>
-                      <td class="properties-table__description">Default opened state value used for nodes that have a
-                        null or undefined value computed from <code>opened</code> component property.
-                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
+                      <td class="properties-table__description"><p>Default opened state value used for TreeNode objects
+                        that have a <code>null</code> or <code>undefined</code> value computed from <code>opened</code>
+                        component property.</p>
+                        <p>When set to <code>undefined</code> or <code>null</code>, the state value is
+                          inherited from parent node.</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">hidden</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>hidden</code></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as hidden state.
+                      <td class="properties-table__description">Property name of TreeNode objects that should contain
+                        hidden state of the item.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Initial hidden state used for all tree nodes.
+                      <td class="properties-table__description">Initial hidden state of all TreeNode objects.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Function that returns hidden state for given node.
+                      <td class="properties-table__description">Function returning hidden state for TreeNode argument.
                       </td>
                     </tr>
                     <tr>
@@ -454,72 +472,77 @@ theme.register('my-template', myTemplate)
                           &nbsp;&nbsp;set: (node: TreeNode, hidden: Boolean): void<br>}
                         </code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Object defining <code>get</code> and <code>set</code>
-                        functions for hidden state of given node. <code>get</code> function returns initial hidden state
-                        for given node, and <code>set</code> function is invoked to update the state into the node when
-                        user interacts with the component view.
+                      <td class="properties-table__description"><p>Object defining <code>get</code> and <code>set</code>
+                        functions for hidden state.</p>
+                        <p><code>get</code> function returns initial hidden state for TreeNode argument.</p>
+                        <p><code>set</code> function is invoked to update state of TreeNode argument when user
+                          interacts with the component.</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">hidden-default</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"><code>false</code></td>
-                      <td class="properties-table__description">Default hidden state value used for nodes that have a
-                        null or undefined value computed from <code>hidden</code> component property.
-                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
+                      <td class="properties-table__description"><p>Default hidden state value used for TreeNode objects
+                        that have a <code>null</code> or <code>undefined</code> value computed from <code>hidden</code>
+                        component property.</p>
+                        <p>When set to <code>undefined</code> or <code>null</code>, the state value is
+                          inherited from parent node.</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">selectable</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
-                      <td class="properties-table__default">false</td>
-                      <td class="properties-table__description">Initial selectable state used for all tree nodes.
+                      <td class="properties-table__default"><code>false</code></td>
+                      <td class="properties-table__description">Initial selectable state of all TreeNode objects.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as
-                        selectable state.
+                      <td class="properties-table__description">Property name of TreeNode objects that should contain
+                        selectable state of the item.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Function that returns initial selectable state for given node.
+                      <td class="properties-table__description">Function returning initial selectable state for TreeNode argument.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">selectable-default</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"><code>false</code></td>
-                      <td class="properties-table__description">Default selectable state value used for nodes that have a
-                        null or undefined value computed from <code>selectable</code> component property.
-                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
+                      <td class="properties-table__description"><p>Default selectable state value used for TreeNode objects
+                        that have a <code>null</code> or <code>undefined</code> value computed from <code>selectable</code>
+                        component property.</p>
+                        <p>When set to <code>undefined</code> or <code>null</code>, the state value is
+                          inherited from parent node.</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">selected</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
-                      <td class="properties-table__default">false</td>
-                      <td class="properties-table__description">Initial selected state used for all tree nodes.
+                      <td class="properties-table__default"><code>false</code></td>
+                      <td class="properties-table__description">Initial selected state of all TreeNode objects.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Property name from <code>data</code> objects used as
-                        selected state.
+                      <td class="properties-table__description">Property name of TreeNode objects that should contain
+                        selected state of the item.
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Function (node: TreeNode): Boolean</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Function that returns initial selected state for given node.
+                      <td class="properties-table__description">Function returning initial selected state for TreeNode argument.
                       </td>
                     </tr>
                     <tr>
@@ -530,35 +553,38 @@ theme.register('my-template', myTemplate)
                           &nbsp;&nbsp;set: (node: TreeNode, selected: Boolean): void<br>}
                         </code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Object defining <code>get</code> and <code>set</code>
-                        functions for selected state of given node. <code>get</code> function returns initial selected state
-                        for given node, and <code>set</code> function is invoked to update the state into the node when
-                        user interacts with the component view.
+                      <td class="properties-table__description"><p>Object defining <code>get</code> and <code>set</code>
+                        functions for selected state.</p>
+                        <p><code>get</code> function returns initial hidden state for TreeNode argument.</p>
+                        <p><code>set</code> function is invoked to update state of TreeNode argument when user
+                          interacts with the component.</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">selected-default</td>
                       <td class="properties-table__type"><code>Boolean</code></td>
                       <td class="properties-table__default"><code>false</code></td>
-                      <td class="properties-table__description">Default selected state value used for nodes that have a
-                        null or undefined value computed from <code>selected</code> component property.
-                        When <code>undefined</code> or <code>null</code>, the state value is inherited from parent node.
+                      <td class="properties-table__description"><p>Default selected state value used for TreeNode objects
+                        that have a <code>null</code> or <code>undefined</code> value computed from <code>selected</code>
+                        component property.</p>
+                        <p>When set to <code>undefined</code> or <code>null</code>, the state value is
+                          inherited from parent node.</p>
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name">theme</td>
                       <td class="properties-table__type"><code>String</code></td>
                       <td class="properties-table__default"><code>vanilla</code></td>
-                      <td class="properties-table__description">Activate a theme registered in the registry through it's name. See Themes
-                        section for more details
+                      <td class="properties-table__description">Activate a theme registered in the registry through
+                        it's name. See <a href="#theme">Themes section</a> for more details
                       </td>
                     </tr>
                     <tr>
                       <td class="properties-table__name"></td>
                       <td class="properties-table__type"><code>Object</code></td>
                       <td class="properties-table__default"></td>
-                      <td class="properties-table__description">Activate a theme from its definition object. See Themes section for more
-                        details
+                      <td class="properties-table__description">Activate a theme from its definition object.
+                        See <a href="#theme">Themes section</a> for more details
                       </td>
                     </tr>
                     </tbody>
@@ -568,7 +594,7 @@ theme.register('my-template', myTemplate)
 
               <div class="row">
                 <div class="col-xs-12">
-                  <h2>Events</h2>
+                  <h2 id="events">Events</h2>
 
                   <p>Vue tree support the following event types:</p>
 

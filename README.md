@@ -22,12 +22,12 @@ npm install @pragmasphere/vue-tree
 ```
 
 ```javascript
-import vue from 'Vue'
+import Vue from 'vue'
 
 import VueTree from '@pragmasphere/vue-tree'
 import '@pragmasphere/vue-tree/lib/vue-tree.css'
 
-vue.components('vue-tree', VueTree)
+Vue.components('vue-tree', VueTree)
 ```
 
 ```html
