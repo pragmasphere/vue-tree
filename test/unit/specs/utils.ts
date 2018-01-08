@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueTreeNode from '@/VueTreeNode.vue'
 
-import { createWrapperArray, Wrapper, WrapperArray } from 'vue-test-utils'
+import { Wrapper, WrapperArray } from 'vue-test-utils'
 
 export function isVisible (wrapper: Wrapper<any>) {
   const computedStyle = window.getComputedStyle(wrapper.element)
@@ -9,7 +9,7 @@ export function isVisible (wrapper: Wrapper<any>) {
 }
 
 export function visibleTreeNodes (wrapper: Wrapper<any>): WrapperArray<Vue> {
-  return createWrapperArray(wrapper.findAll(VueTreeNode).wrappers.filter(w => isVisible(w)))
+  return wrapper.findAll(VueTreeNode).filter(w => isVisible(w))
 }
 
 export function visibleText (wrapper: Wrapper<any>) {
