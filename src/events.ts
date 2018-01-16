@@ -1,3 +1,4 @@
+import VueTreeNode from './VueTreeNode.vue'
 import { TreeNode } from '@/vue-tree-types'
 
 export enum EventType {
@@ -8,7 +9,7 @@ export enum EventType {
 
 export interface VueTreeEvent {
   type: EventType
-  vm: any // TODO: Create Type matching VueTreeNode component
+  vm: VueTreeNode
   data: TreeNode
 }
 

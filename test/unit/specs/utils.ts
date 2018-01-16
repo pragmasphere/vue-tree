@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueTreeNode from '@/VueTreeNode'
+import VueTreeNode from '@/VueTreeNode.vue'
 
 import { Wrapper, WrapperArray } from 'vue-test-utils'
 

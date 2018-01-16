@@ -55,11 +55,13 @@ module.exports = {
     ]
   },
   plugins: [
+    /*
     new ForkTsCheckerWebpackPlugin({
       vue: true,
       tslint: config.dev.useTslint,
       watch: ['./src', './app'] // optional but improves performance (less stat calls)
     }),
+    */
     new webpack.ProvidePlugin({
       Babel: "babel-standalone"
     })

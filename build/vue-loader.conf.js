@@ -6,7 +6,7 @@ const sourceMapEnabled = isProduction
   ? config.build.productionSourceMap
   : config.dev.cssSourceMap
 
-const scriptLoadersOptions = {ts: {transpileOnly: true, appendTsSuffixTo: [/\.vue$/]}}
+const scriptLoadersOptions = {ts: {transpileOnly: false, appendTsSuffixTo: [/\.vue$/]}}
 
 module.exports = {
   scriptLoadersOptions,

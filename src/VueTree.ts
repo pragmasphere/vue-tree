@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import VueTreeNode from '@/VueTreeNode'
+import VueTreeNode from '@/VueTreeNode.vue'
 import props from '@/props'
 
 export default Vue.extend({
