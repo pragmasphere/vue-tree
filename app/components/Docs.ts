@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import VueTree from '@/VueTree.vue'
+import VueTree from '@/VueTree'
 
 import examples from './examples'
 

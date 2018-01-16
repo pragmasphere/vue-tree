@@ -1,5 +1,5 @@
-import VueTree from './VueTree.vue'
-import VueTreeNode from './VueTreeNode.vue'
+import VueTree from './VueTree'
+import VueTreeNode from './VueTreeNode'
 
 export {
   VueTree,

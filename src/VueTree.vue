@@ -18,6 +18,10 @@
                    :theme="theme"></vue-tree-node>
   </ul>
 </template>
+
+<script lang="ts" src="./VueTree.ts">
+</script>
+
 <style lang="scss">
 ul.vue-tree {
   margin: 0 0 0 -1em;
@@ -41,4 +45,3 @@ ul.vue-tree {
   }
 }
 </style>
-<script lang="ts" src="./VueTree.ts"></script>

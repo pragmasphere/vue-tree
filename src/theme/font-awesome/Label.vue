@@ -11,12 +11,14 @@
     </span>
   </span>
 </template>
+
 <script lang="ts">
 import Vue from 'vue'
 import props from '../themeProps'
 
 export default Vue.extend({ props })
 </script>
+
 <style lang="scss" scoped>
 .vue-tree__tree-node-handle {
   font-weight: bold;

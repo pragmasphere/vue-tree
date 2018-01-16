@@ -10,10 +10,6 @@ function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
-const isDevelopment = process.env.NODE_ENV === 'development'
-
-const scriptLoadersOptions = {ts: {transpileOnly: isDevelopment, appendTsSuffixTo: [/\.vue$/]}}
-
 const createLintingRule = () => ({
   test: /\.(js|vue)$/,
   loader: 'eslint-loader',
@@ -52,18 +48,18 @@ module.exports = {
     extensions: ['.vue', '.js', '.ts', '.json'],
     alias: {
       '@': resolve('src'),
-      '#': resolve('app')
+      '~': resolve('app')
     },
     modules: [
       "node_modules"
     ]
   },
   plugins: [
-    ...(isDevelopment? [
-      new ForkTsCheckerWebpackPlugin({
-        watch: ['./src', './app'] // optional but improves performance (less stat calls)
-      })
-    ] : []),
+    new ForkTsCheckerWebpackPlugin({
+      vue: true,
+      tslint: config.dev.useTslint,
+      watch: ['./src', './app'] // optional but improves performance (less stat calls)
+    }),
     new webpack.ProvidePlugin({
       Babel: "babel-standalone"
     })
@@ -71,7 +67,6 @@ module.exports = {
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),
-
       ...(config.dev.useTslint ? [createTsLintingRule()] : []),
       {
         test: /\.vue$/,
@@ -81,12 +76,12 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        use: utils.scriptLoaders(scriptLoadersOptions).js,
-        include: [resolve('src'), resolve('app'), resolve('test')]
+        use: utils.scriptLoaders(vueLoaderConfig.scriptLoadersOptions).js,
+        include: [resolve('src'), resolve('app'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
         test: /\.ts$/,
-        use: utils.scriptLoaders(scriptLoadersOptions).ts,
+        use: utils.scriptLoaders(vueLoaderConfig.scriptLoadersOptions).ts,
         include: [resolve('src'), resolve('app'), resolve('test')]
       },
       {

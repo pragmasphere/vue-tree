@@ -20,11 +20,11 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
     spinner.stop()
     if (err) throw err
     process.stdout.write(stats.toString({
-      colors: true/*,
+      colors: true,
       modules: false,
-      children: false,
+      children: true,
       chunks: false,
-      chunkModules: false*/
+      chunkModules: false
     }) + '\n\n')
 
     if (stats.hasErrors()) {

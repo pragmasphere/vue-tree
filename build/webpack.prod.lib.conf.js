@@ -122,4 +122,9 @@ const webpackMinifiedConfig = merge(webpackConfig, {
   ]
 })
 
+const StatsWriterPlugin = require("webpack-stats-plugin").StatsWriterPlugin;
+webpackConfig.plugins.push(new StatsWriterPlugin({
+    filename: "stats.json" // Default
+  }))
+
 module.exports = [webpackConfig, webpackMinifiedConfig]

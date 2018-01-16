@@ -14,9 +14,9 @@ import Scrollspy from 'vue2-scrollspy'
 // @ts-ignore: Missing type definitions
 import VueHighlightJS from 'vue-highlightjs'
 
-import App from './App.vue'
+import App from './App'
 import router from './router'
-import VueTree from '@/VueTree.vue'
+import VueTree from '@/VueTree'
 
 Vue.config.productionTip = false
 

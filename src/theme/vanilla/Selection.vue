@@ -5,14 +5,13 @@
            v-model="vm.dataSelected">
   </span>
 </template>
+
 <script lang="ts">
 import Vue from 'vue'
 import props from '../themeProps'
 
 export default Vue.extend({ props })
 </script>
+
 <style lang="scss" scoped>
 </style>
-
-
-

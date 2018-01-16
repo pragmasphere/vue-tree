@@ -275,7 +275,6 @@ theme.register('my-template', myTemplate)
                     </div>
                   </div>
 
-
                 </div>
               </div>
 
@@ -625,6 +624,10 @@ theme.register('my-template', myTemplate)
     </div>
   </div>
 </template>
+
+<script lang="ts" src="./Docs.ts">
+</script>
+
 <style lang="scss" scoped>
 @import '~bootstrap-sass/assets/stylesheets/bootstrap/variables';
 
@@ -695,4 +698,3 @@ theme.register('my-template', myTemplate)
   }
 }
 </style>
-<script lang="ts" src="./Docs.ts"></script>

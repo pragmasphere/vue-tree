@@ -27,9 +27,12 @@
     </div>
   </div>
 </template>
+
+<script lang="ts" src="./Main.ts">
+</script>
+
 <style lang="scss">
 .badges {
   padding-bottom: 1em;
 }
 </style>
-<script lang="ts" src="./Main.ts"></script>

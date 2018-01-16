@@ -16,8 +16,9 @@
     </span>
     <ul class="vue-tree__tree-node-children">
       <component :is="themeInstance.beforeChildren" v-if="themeInstance.beforeChildren" v-bind="themeContext"></component>
-      <template v-for="child of childrenNodes">
-        <vue-tree-node v-show="dataOpened"
+      <template v-for="(child, $index) of childrenNodes">
+        <vue-tree-node :key="$index"
+                       v-show="dataOpened"
                        v-on="$listeners"
                        :class="{'vue-tree__tree-node--parent-opened': dataOpened, 'vue-tree__tree-node--parent-closed': !dataOpened}"
                        :data="child"
@@ -40,6 +41,10 @@
     </ul>
   </li>
 </template>
+
+<script lang="ts" src="./VueTreeNode.ts">
+</script>
+
 <style lang="scss" scoped>
 .vue-tree__tree-node-handle {
   cursor: pointer;
@@ -50,4 +55,3 @@
   }
 }
 </style>
-<script lang="ts" src="./VueTreeNode.ts"></script>

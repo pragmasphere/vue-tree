@@ -118,7 +118,7 @@ exports.createNotifierCallback = () => {
   }
 }
 
-function dependencyObject(dependency) {
+function externalObject(dependency) {
     return {
       root: toPascalCase(dependency),
       amd: dependency,
@@ -133,13 +133,13 @@ exports.buildExternalsFromDependencies = function() {
   const externals = {};
 
   for (const dependency in packageJson.dependencies) {
-    externals[dependency] = dependencyObject(dependency);
+    externals[dependency] = externalObject(dependency);
   }
   for (const dependency in packageJson.peerDependencies) {
-    externals[dependency] = dependencyObject(dependency);
+    externals[dependency] = externalObject(dependency);
   }
   for (const dependency in packageJson.devDependencies) {
-    externals[dependency] = dependencyObject(dependency);
+    externals[dependency] = externalObject(dependency);
   }
 
   return externals;
